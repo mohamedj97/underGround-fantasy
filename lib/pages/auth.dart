@@ -9,7 +9,6 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPage extends State<AuthPage> {
   bool _rememberMe = false;
-
   Widget _buildEmailTF() {
     return SafeArea(
       child: Column(
