@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fantasy/utilities/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fantasy/models/auth.dart';
 
 class AuthPage extends StatefulWidget {
   @override
@@ -8,7 +10,12 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPage extends State<AuthPage> {
+  final _auth=FirebaseAuth.instance;
+  AuthMode _authMode=AuthMode.Login;
   bool _rememberMe = false;
+  String email;
+  String password;
+
   Widget _buildEmailTF() {
     return SafeArea(
       child: Column(
@@ -23,7 +30,18 @@ class _AuthPage extends State<AuthPage> {
             alignment: Alignment.centerLeft,
             decoration: kBoxDecorationStyle,
             height: 50.0,
-            child: TextField(
+            child: TextFormField(
+              validator: (String value) {
+                if (value.isEmpty ||
+                    !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                        .hasMatch(value)) {
+                  return 'Please enter a valid email';
+                }
+              },
+              onChanged: (value)
+              {
+                email=value;
+              },
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
                 color: Colors.white,
@@ -59,7 +77,11 @@ class _AuthPage extends State<AuthPage> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 50.0,
-          child: TextField(
+          child: TextFormField(
+            onChanged: (value)
+            {
+              password=value;
+            },
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -122,20 +144,45 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-  Widget _buildLoginBtn() {
+  Widget _buildAuthBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () async{
+          try{
+            if(_authMode==AuthMode.SignUp)
+              {
+                final newUser= await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                if(newUser!=null)
+                {
+                  //Navigate
+                  print ('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+                }
+              }
+            else if(_authMode==AuthMode.Login)
+              {
+                final user=await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+                if(user!=null)
+                {
+                  print ('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                }
+              }
+            }
+          catch(e)
+          {
+            print (e);
+          }
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
         color: Colors.white,
         child: Text(
-          'LOGIN',
+          _authMode==AuthMode.SignUp?'Register': 'LOGIN',
           style: TextStyle(
             color: Colors.grey,
             letterSpacing: 1.5,
@@ -214,9 +261,13 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-  Widget _buildSignupBtn() {
+  Widget _buildSignUpBtn() {
     return GestureDetector(
-      onTap: () => print('Sign Up Button Pressed'),
+      onTap: () {
+        setState(() {
+          _authMode= AuthMode.SignUp;
+        });
+      },
       child: RichText(
         text: TextSpan(
           children: [
@@ -292,27 +343,27 @@ class _AuthPage extends State<AuthPage> {
                         width: 150,
                         child: Image.asset('assets/bg.png'),
                       ),
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+//                      Text(
+//                        'Sign In',
+//                        style: TextStyle(
+//                          color: Colors.white,
+//                          fontFamily: 'OpenSans',
+//                          fontSize: 30.0,
+//                          fontWeight: FontWeight.bold,
+//                        ),
+//                      ),
                       //SizedBox(height: 5.0),
                       _buildEmailTF(),
                     /*  SizedBox(
                         height: 10.0,
                       ),*/
                       _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
+                      _authMode==AuthMode.SignUp? Container():_buildForgotPasswordBtn(),
                       _buildRememberMeCheckbox(),
-                      _buildLoginBtn(),
-                      _buildSignInWithText(),
-                      _buildSocialBtnRow(),
-                      _buildSignupBtn(),
+                      _buildAuthBtn(),
+                      _authMode==AuthMode.SignUp? Container():_buildSignInWithText(),
+                      _authMode==AuthMode.SignUp? Container():_buildSocialBtnRow(),
+                      _authMode==AuthMode.SignUp? Container():_buildSignUpBtn(),
                     ],
                   ),
                 ),

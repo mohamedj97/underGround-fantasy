@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "244932964644",
+    "firebase_url": "https://underground-fantasy.firebaseio.com",
+    "project_id": "underground-fantasy",
+    "storage_bucket": "underground-fantasy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244932964644:android:c70b8cbd7665b7e139c3b1",
+        "android_client_info": {
+          "package_name": "com.underground.fantasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244932964644-s9taaja0g5pk4d5ad84attar3u6jgk74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMgSNP20PuXGZ3RLtPYN_oZFPq4ztl-8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244932964644-s9taaja0g5pk4d5ad84attar3u6jgk74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
