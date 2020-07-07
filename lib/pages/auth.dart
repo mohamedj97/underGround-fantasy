@@ -1,3 +1,4 @@
+import 'package:fantasy/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fantasy/utilities/constants.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fantasy/models/auth.dart';
 
 class AuthPage extends StatefulWidget {
+  static const String id='AuthPage';
   @override
   _AuthPage createState() => _AuthPage();
 }
@@ -157,8 +159,7 @@ class _AuthPage extends State<AuthPage> {
                 final newUser= await _auth.createUserWithEmailAndPassword(email: email, password: password);
                 if(newUser!=null)
                 {
-                  //Navigate
-                  print ('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+                  Navigator.pushReplacementNamed(context, HomePage.id);
                 }
               }
             else if(_authMode==AuthMode.Login)
@@ -167,7 +168,7 @@ class _AuthPage extends State<AuthPage> {
 
                 if(user!=null)
                 {
-                  print ('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                  Navigator.pushReplacementNamed(context, HomePage.id);
                 }
               }
             }
@@ -261,18 +262,18 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-  Widget _buildSignUpBtn() {
+  Widget _buildChangeModeBtn() {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _authMode= AuthMode.SignUp;
+          _authMode= _authMode== AuthMode.Login?AuthMode.SignUp:AuthMode.Login;
         });
       },
       child: RichText(
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'Don\'t have an Account? ',
+              text: ('${_authMode==AuthMode.Login ? 'Don\'t have an Account? ':'have an Account? '}'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -280,7 +281,7 @@ class _AuthPage extends State<AuthPage> {
               ),
             ),
             TextSpan(
-              text: 'Sign Up',
+              text:('${_authMode==AuthMode.Login ? 'Signup':'Login'}'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -343,27 +344,20 @@ class _AuthPage extends State<AuthPage> {
                         width: 150,
                         child: Image.asset('assets/bg.png'),
                       ),
-//                      Text(
-//                        'Sign In',
-//                        style: TextStyle(
-//                          color: Colors.white,
-//                          fontFamily: 'OpenSans',
-//                          fontSize: 30.0,
-//                          fontWeight: FontWeight.bold,
-//                        ),
-//                      ),
-                      //SizedBox(height: 5.0),
                       _buildEmailTF(),
-                    /*  SizedBox(
-                        height: 10.0,
-                      ),*/
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       _buildPasswordTF(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       _authMode==AuthMode.SignUp? Container():_buildForgotPasswordBtn(),
                       _buildRememberMeCheckbox(),
                       _buildAuthBtn(),
                       _authMode==AuthMode.SignUp? Container():_buildSignInWithText(),
                       _authMode==AuthMode.SignUp? Container():_buildSocialBtnRow(),
-                      _authMode==AuthMode.SignUp? Container():_buildSignUpBtn(),
+                      _buildChangeModeBtn(),
                     ],
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:fantasy/pages/auth.dart';
+import 'package:fantasy/pages/home.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,11 +9,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'UG Fantasy',
       theme: ThemeData(
         brightness:Brightness.dark,
       ),
       home: AuthPage(),
+
+      routes: {
+        AuthPage.id :(BuildContext context) =>AuthPage(),
+        HomePage.id :(BuildContext context) =>HomePage(),
+      },
+
     );
   }
 }
