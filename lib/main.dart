@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness:Brightness.dark,
       ),
-      home: LoadingPage(),
+      home: HomePage(),
 
       routes: {
         AuthPage.id :(BuildContext context) =>AuthPage(),
