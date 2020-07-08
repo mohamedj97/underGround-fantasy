@@ -14,7 +14,7 @@ class _LoadingPageState extends State<LoadingPage> {
   Widget build(BuildContext context) {
     return new SplashScreen(
       title: new Text(
-        'Welcome to Undergound Fantasy',
+        'UnderGround Fantasy',
         style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
       ),
       seconds: 8,
@@ -23,7 +23,7 @@ class _LoadingPageState extends State<LoadingPage> {
           'assets/giphy.gif'),
       backgroundColor: Colors.black,
       styleTextUnderTheLoader: new TextStyle(),
-      photoSize: 150.0,
+      photoSize: 200.0,
       onClick: () => print("Flutter Egypt"),
       loaderColor: Colors.white,
     );
