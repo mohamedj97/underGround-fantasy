@@ -25,6 +25,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   firebase_auth: ^0.16.1
   splashscreen: ^1.2.0
+  shimmer: ^1.1.1
+  animated_text_kit: ^2.0.0
+  google_fonts: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +50,8 @@ flutter:
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
     - assets/giphy.gif
-    - assets/loading.gif
+    - assets/ex.gif
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -61,9 +65,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: OpenSans
+   # - family: OpenSans
+   #   fonts:
+  #      - asset: assets/fonts/OpenSans.ttf
+    - family: Pacifico
       fonts:
-        - asset: assets/fonts/OpenSans.ttf
+        - asset: assets/fonts/Pacifico-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

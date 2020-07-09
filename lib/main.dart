@@ -2,6 +2,7 @@ import 'package:fantasy/pages/auth.dart';
 import 'package:fantasy/pages/home.dart';
 import 'package:fantasy/pages/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:fantasy/pages/SplashScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         AuthPage.id :(BuildContext context) =>AuthPage(),
         HomePage.id :(BuildContext context) =>HomePage(),
         LoadingPage.id :(BuildContext context) =>LoadingPage(),
+        SplashScreen.id :(BuildContext context) =>SplashScreen()
       },
 
     );
