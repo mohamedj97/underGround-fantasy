@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class OpenContainerTransformDemo extends StatelessWidget {
+class RuleDescriptionModal extends StatelessWidget {
 
   final int ruleNumber;
   final String ruleName;
-  OpenContainerTransformDemo(this.ruleNumber,this.ruleName);
+  RuleDescriptionModal(this.ruleNumber,this.ruleName);
 
   final List<String> _tabs = [
 
@@ -27,7 +27,7 @@ class OpenContainerTransformDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: Colors.black26,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(30),
             topRight: const Radius.circular(30),
@@ -35,8 +35,8 @@ class OpenContainerTransformDemo extends StatelessWidget {
         ),
         child: Text(_tabs[ruleNumber],
         style: TextStyle(
-          fontFamily: 'Pacifico',
           fontSize: 40,
+          color: Color(0xFDB9D9EB),
           fontWeight: FontWeight.bold,
         ),),
       );

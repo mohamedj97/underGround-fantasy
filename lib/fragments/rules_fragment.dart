@@ -3,12 +3,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:fantasy/widgets/rule_description.dart';
 import 'package:fantasy/widgets/rule_title_list_tile.dart';
 
-class TransitionsHomePage extends StatefulWidget {
+class HomeRulesFragment extends StatefulWidget {
   @override
-  _TransitionsHomePageState createState() => _TransitionsHomePageState();
+  _HomeRulesFragmentState createState() => _HomeRulesFragmentState();
 }
 
-class _TransitionsHomePageState extends State<TransitionsHomePage> {
+class _HomeRulesFragmentState extends State<HomeRulesFragment> {
   int ruleNumber = 0;
 
   @override
@@ -29,7 +29,7 @@ class _TransitionsHomePageState extends State<TransitionsHomePage> {
                       await Future<void>.delayed(const Duration(milliseconds: 200));
                       timeDilation = 3;
                       showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> OpenContainerTransformDemo(ruleNumber,'Master-Branch'));
+                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Master-Branch'));
                     },
                   ),
                   TransitionListTile(
@@ -41,7 +41,7 @@ class _TransitionsHomePageState extends State<TransitionsHomePage> {
                       await Future<void>.delayed(const Duration(milliseconds: 200));
                       timeDilation = 3;
                       showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> OpenContainerTransformDemo(ruleNumber,'Goals Conceded'));
+                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goals Conceded'));
                     },
                   ),
                   TransitionListTile(
@@ -53,7 +53,7 @@ class _TransitionsHomePageState extends State<TransitionsHomePage> {
                       await Future<void>.delayed(const Duration(milliseconds: 200));
                       timeDilation = 3;
                       showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> OpenContainerTransformDemo(ruleNumber,'Goal keeping'));
+                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goal keeping'));
                     },
                   ),
                   TransitionListTile(
@@ -65,7 +65,7 @@ class _TransitionsHomePageState extends State<TransitionsHomePage> {
                       await Future<void>.delayed(const Duration(milliseconds: 100));
                       timeDilation = 3;
                       showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> OpenContainerTransformDemo(ruleNumber,'Groups/Join Groups'));
+                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Groups/Join Groups'));
                     },
                   ),
                   TransitionListTile(
@@ -78,7 +78,7 @@ class _TransitionsHomePageState extends State<TransitionsHomePage> {
                       timeDilation = 3;
                       showModalBottomSheet(
                           context: context,
-                          builder:(context)=> OpenContainerTransformDemo(ruleNumber,'Squad-Instructions'));
+                          builder:(context)=> RuleDescriptionModal(ruleNumber,'Squad-Instructions'));
                     },
                   ),
                   TransitionListTile(
@@ -90,7 +90,7 @@ class _TransitionsHomePageState extends State<TransitionsHomePage> {
                       await Future<void>.delayed(const Duration(milliseconds: 100));
                       timeDilation = 3;
                       showModalBottomSheet(context: context,
-                          builder:(context)=> OpenContainerTransformDemo(ruleNumber,'Notifications'));
+                          builder:(context)=> RuleDescriptionModal(ruleNumber,'Notifications'));
                     },
                   ),
                 ],

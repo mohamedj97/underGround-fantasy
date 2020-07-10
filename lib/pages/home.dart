@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     HomeFragment(),
     Container(child: Center(child: Text('Matches'),),),
     Container(child: Center(child: Text('Groups'),),),
-    TransitionsHomePage(),
+    HomeRulesFragment(),
     Container(child: Center(child: Text('Me'),),),
   ];
 
