@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fantasy/utilities/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'home_fragment.dart';
+import '../fragments/home_fragment.dart';
+import 'package:fantasy/fragments/rules_fragment.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     HomeFragment(),
     Container(child: Center(child: Text('Matches'),),),
     Container(child: Center(child: Text('Groups'),),),
-    Container(child: Center(child: Text('Notifications'),),),
+    TransitionsHomePage(),
     Container(child: Center(child: Text('Me'),),),
   ];
 
@@ -69,8 +70,8 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Icon(Icons.notifications, size: 30),
-              Text('Latest')
+              Icon(Icons.receipt, size: 30),
+              Text('Rules')
             ],
           ),
           Column(

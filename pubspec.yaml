@@ -28,6 +28,10 @@ dependencies:
   shimmer: ^1.1.1
   animated_text_kit: ^2.0.0
   google_fonts: ^0.3.2
+  animations: ^1.1.1
+  argon_buttons_flutter: ^1.0.2
+  flutter_spinkit: ^4.1.2
+  curved_navigation_bar: ^0.3.3
 
 dev_dependencies:
   flutter_test:
@@ -50,9 +54,6 @@ flutter:
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
     - assets/giphy.gif
-    - assets/ex.gif
-
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
