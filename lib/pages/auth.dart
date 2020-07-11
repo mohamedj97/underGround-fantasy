@@ -1,22 +1,47 @@
+import 'dart:convert';
+
 import 'package:fantasy/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fantasy/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fantasy/models/auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
 
 class AuthPage extends StatefulWidget {
-  static const String id='AuthPage';
+  static const String id = 'AuthPage';
+
   @override
   _AuthPage createState() => _AuthPage();
 }
 
 class _AuthPage extends State<AuthPage> {
-  final _auth=FirebaseAuth.instance;
-  AuthMode _authMode=AuthMode.Login;
+
+
+  void _facebookLogin()async
+  {
+    FacebookLogin _fbLogin=new FacebookLogin();
+    final result = await _fbLogin.logIn(['email']);
+    FacebookAccessToken token = result.accessToken;
+    final graphResponse = await http.get(
+        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+     final profile = json.decode(graphResponse.body);
+    print('sssssssss${graphResponse.body}');
+    if(result.status==_fbLogin.isLoggedIn)
+      {
+        AuthCredential authCredential = FacebookAuthProvider.getCredential(accessToken: token.token);
+        _auth.signInWithCredential(authCredential);
+      }
+  }
+
+
+  final _auth = FirebaseAuth.instance;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthMode _authMode = AuthMode.Login;
   bool _rememberMe = false;
-  String email;
-  String password;
+  String _email;
+  String _password;
 
   Widget _buildEmailTF() {
     return SafeArea(
@@ -34,15 +59,16 @@ class _AuthPage extends State<AuthPage> {
             height: 50.0,
             child: TextFormField(
               validator: (String value) {
-                if (value.isEmpty ||
-                    !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                if (!RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                         .hasMatch(value)) {
                   return 'Please enter a valid email';
                 }
               },
-              onChanged: (value)
-              {
-                email=value;
+              onChanged: (String value) {
+                _email = value;
+              },
+              onSaved: (String value) {
+                _email = value;
               },
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
@@ -80,9 +106,16 @@ class _AuthPage extends State<AuthPage> {
           decoration: kBoxDecorationStyle,
           height: 50.0,
           child: TextFormField(
-            onChanged: (value)
-            {
-              password=value;
+            validator: (String value) {
+              if (value.length < 6) {
+                return 'Password must be invalid and +6 characters';
+              }
+            },
+            onChanged: (String value) {
+              _password = value;
+            },
+              onSaved:  (String value) {
+              _email = value;
             },
             obscureText: true,
             style: TextStyle(
@@ -152,30 +185,29 @@ class _AuthPage extends State<AuthPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () async{
-          try{
-            if(_authMode==AuthMode.SignUp)
-              {
-                final newUser= await _auth.createUserWithEmailAndPassword(email: email, password: password);
-                if(newUser!=null)
-                {
+        onPressed: () async {
+          if (_formKey.currentState.validate()) {
+            _formKey.currentState.save;
+            try {
+              if (_authMode == AuthMode.SignUp) {
+                final newUser = await _auth.createUserWithEmailAndPassword(
+                    email: _email, password: _password);
+                if (newUser != null) {
                   Navigator.pushReplacementNamed(context, HomePage.id);
                 }
-              }
-            else if(_authMode==AuthMode.Login)
-              {
-                final user=await _auth.signInWithEmailAndPassword(email: email, password: password);
+              } else if (_authMode == AuthMode.Login) {
+                final user = await _auth.signInWithEmailAndPassword(
+                    email: _email, password: _password);
 
-                if(user!=null)
-                {
+                if (user != null) {
                   Navigator.pushReplacementNamed(context, HomePage.id);
                 }
               }
+            } catch (e) {
+              print(e);
             }
-          catch(e)
-          {
-            print (e);
           }
+
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -183,7 +215,7 @@ class _AuthPage extends State<AuthPage> {
         ),
         color: Colors.white,
         child: Text(
-          _authMode==AuthMode.SignUp?'Register': 'LOGIN',
+          _authMode == AuthMode.SignUp ? 'Register' : 'LOGIN',
           style: TextStyle(
             color: Colors.grey,
             letterSpacing: 1.5,
@@ -215,9 +247,9 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
+  Widget _buildSocialBtn(AssetImage logo) {
     return GestureDetector(
-      onTap: onTap,
+      onTap:()=>_facebookLogin(),
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -246,13 +278,11 @@ class _AuthPage extends State<AuthPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-                () => print('Login with Facebook'),
             AssetImage(
               'assets/logos/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
-                () => print('Login with Google'),
             AssetImage(
               'assets/logos/google.jpg',
             ),
@@ -266,14 +296,16 @@ class _AuthPage extends State<AuthPage> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _authMode= _authMode== AuthMode.Login?AuthMode.SignUp:AuthMode.Login;
+          _authMode =
+              _authMode == AuthMode.Login ? AuthMode.SignUp : AuthMode.Login;
         });
       },
       child: RichText(
         text: TextSpan(
           children: [
             TextSpan(
-              text: ('${_authMode==AuthMode.Login ? 'Don\'t have an Account? ':'have an Account? '}'),
+              text:
+                  ('${_authMode == AuthMode.Login ? 'Don\'t have an Account? ' : 'have an Account? '}'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -281,7 +313,7 @@ class _AuthPage extends State<AuthPage> {
               ),
             ),
             TextSpan(
-              text:('${_authMode==AuthMode.Login ? 'Signup':'Login'}'),
+              text: ('${_authMode == AuthMode.Login ? 'Signup' : 'Login'}'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -308,8 +340,8 @@ class _AuthPage extends State<AuthPage> {
                 width: double.infinity,
                 decoration: kBackGroundContainerDecoration,
               ),
-              Container(
-                height: double.infinity,
+              Form(
+                key: _formKey,
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
@@ -332,11 +364,17 @@ class _AuthPage extends State<AuthPage> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      _authMode==AuthMode.SignUp? Container():_buildForgotPasswordBtn(),
+                      _authMode == AuthMode.SignUp
+                          ? Container()
+                          : _buildForgotPasswordBtn(),
                       _buildRememberMeCheckbox(),
                       _buildAuthBtn(),
-                      _authMode==AuthMode.SignUp? Container():_buildSignInWithText(),
-                      _authMode==AuthMode.SignUp? Container():_buildSocialBtnRow(),
+                      _authMode == AuthMode.SignUp
+                          ? Container()
+                          : _buildSignInWithText(),
+                      _authMode == AuthMode.SignUp
+                          ? Container()
+                          : _buildSocialBtnRow(),
                       _buildChangeModeBtn(),
                     ],
                   ),
