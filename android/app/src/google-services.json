@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "244932964644-g1tnq148smbnfgidrru91dlofts5r32p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.underground.fantasy",
+            "certificate_hash": "607b0687d530f7d82c7a19bcef9b1c7b1f924183"
+          }
+        },
+        {
           "client_id": "244932964644-s9taaja0g5pk4d5ad84attar3u6jgk74.apps.googleusercontent.com",
           "client_type": 3
         }

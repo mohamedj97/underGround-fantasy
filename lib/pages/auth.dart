@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fantasy/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fantasy/models/auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthPage extends StatefulWidget {
   static const String id = 'AuthPage';
@@ -19,6 +18,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPage extends State<AuthPage> {
 
 
+
   void _facebookLogin()async
   {
     FacebookLogin _fbLogin=new FacebookLogin();
@@ -26,7 +26,7 @@ class _AuthPage extends State<AuthPage> {
     FacebookAccessToken token = result.accessToken;
     final graphResponse = await http.get(
         'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
-     final profile = json.decode(graphResponse.body);
+     //final profile = json.decode(graphResponse.body);
     print('sssssssss${graphResponse.body}');
     if(result.status==_fbLogin.isLoggedIn)
       {
@@ -35,8 +35,39 @@ class _AuthPage extends State<AuthPage> {
       }
   }
 
+  Future<void> _googleLogin()async
+  {
+
+    GoogleSignInAccount googleSignInAccount=await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication= await googleSignInAccount.authentication;
+
+    AuthCredential credential =GoogleAuthProvider.getCredential(idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
+
+    AuthResult result= (await _auth.signInWithCredential(credential));
+
+    _user=result.user;
+
+    setState(() {
+      isSignIn=true;
+    });
+
+
+  }
+  Future<void> googleSignOut()async
+  {
+    await _auth.signOut().then((onValue){
+      _googleSignIn.signOut();
+      setState(() {
+        isSignIn=false;
+      });
+    });
+  }
 
   final _auth = FirebaseAuth.instance;
+  FirebaseUser _user;
+  GoogleSignIn _googleSignIn=new GoogleSignIn();
+  bool isSignIn=false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AuthMode _authMode = AuthMode.Login;
   bool _rememberMe = false;
@@ -249,7 +280,7 @@ class _AuthPage extends State<AuthPage> {
 
   Widget _buildSocialBtn(AssetImage logo) {
     return GestureDetector(
-      onTap:()=>_facebookLogin(),
+      onTap:()=>_googleLogin(),
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -375,7 +406,18 @@ class _AuthPage extends State<AuthPage> {
                       _authMode == AuthMode.SignUp
                           ? Container()
                           : _buildSocialBtnRow(),
-                      _buildChangeModeBtn(),
+                      isSignIn? Center(child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(_user.photoUrl),
+                          ),
+                          Text(_user.displayName),
+                          Text(_user.email),
+                          OutlineButton(onPressed: (){
+                            googleSignOut();
+                          },child: Text('Logout'),)
+                        ],
+                      ),):_buildChangeModeBtn(),
                     ],
                   ),
                 ),
