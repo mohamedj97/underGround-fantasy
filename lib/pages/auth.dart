@@ -248,7 +248,7 @@ class _AuthPage extends State<AuthPage> {
         child: Text(
           _authMode == AuthMode.SignUp ? 'Register' : 'LOGIN',
           style: TextStyle(
-            color: Colors.grey,
+            color: Colors.blueAccent,
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,

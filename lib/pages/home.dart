@@ -4,6 +4,7 @@ import 'package:fantasy/utilities/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../fragments/home_fragment.dart';
 import 'package:fantasy/fragments/rules_fragment.dart';
+import '../fragments/playerprofile.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     Container(child: Center(child: Text('Matches'),),),
     Container(child: Center(child: Text('Groups'),),),
     HomeRulesFragment(),
-    Container(child: Center(child: Text('Me'),),),
+    PlayerProfile(),
   ];
 
   @override
@@ -84,6 +85,7 @@ class _HomePageState extends State<HomePage> {
         ],
         onTap: (index) {
           setState(() {
+            print(_currentIndex.toString());
             _currentIndex = index;
           });
         },

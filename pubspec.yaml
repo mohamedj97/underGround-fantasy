@@ -35,6 +35,8 @@ dependencies:
   flutter_facebook_login: ^3.0.0
   http: ^0.12.1
   google_sign_in: ^4.5.1
+  image_picker: ^0.6.7+4
+  firebase_storage: ^3.1.6
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,7 @@ flutter:
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
     - assets/giphy.gif
+    - assets/noprofile.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
