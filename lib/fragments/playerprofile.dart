@@ -2,20 +2,34 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 class PlayerProfile extends StatefulWidget{
   @override
   _PlayerProfileState createState() => _PlayerProfileState();
-
-
 }
 
 class _PlayerProfileState extends State<PlayerProfile> {
+
   File _image;
   String _imageUrl;
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser loggedInUser;
 
+  void getCurrentUser() async
+  {
+    try{
+      final user=await _auth.currentUser();
+      if(user!=null)
+      {
+        loggedInUser=user;
+        print('pppppp${user.uid}');
+      }
+    }
+    catch(e)
+    {
+      print (e);
+    }
+  }
   Image imagecheck()
   {
     if(_imageUrl!=null){
@@ -30,7 +44,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
 
   void initState() {
     super.initState();
-
+    getCurrentUser();
     var ref = FirebaseStorage.instance.ref().child("/ProfileImages/333").child("333");
     _image=null;
     ref.getDownloadURL().then((loc) => setState(() => _imageUrl = loc));
@@ -121,7 +135,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('GasserAshraf',
+                        child: Text(loggedInUser.uid,
                             style: TextStyle(
                                 color: Colors.blueGrey,
                                 fontSize: 20.0,
