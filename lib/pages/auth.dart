@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fantasy/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +19,15 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPage extends State<AuthPage> {
 
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser _user;
+  GoogleSignIn _googleSignIn=new GoogleSignIn();
+  bool isSignIn=false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthMode _authMode = AuthMode.Login;
+  bool _rememberMe = false;
+  String _email;
+  String _password;
 
 
   void _facebookLogin()async
@@ -26,18 +37,20 @@ class _AuthPage extends State<AuthPage> {
     FacebookAccessToken token = result.accessToken;
     final graphResponse = await http.get(
         'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
-     //final profile = json.decode(graphResponse.body);
+     final profile = json.decode(graphResponse.body);
     print('sssssssss${graphResponse.body}');
     if(result.status==_fbLogin.isLoggedIn)
       {
         AuthCredential authCredential = FacebookAuthProvider.getCredential(accessToken: token.token);
         _auth.signInWithCredential(authCredential);
       }
+    setState(() {
+      isSignIn=true;
+    });
+    //Navigator.pushReplacementNamed(context, HomePage.id);
   }
 
-  Future<void> _googleLogin()async
-  {
-
+  Future<void> _googleLogin()async {
     GoogleSignInAccount googleSignInAccount=await _googleSignIn.signIn();
     GoogleSignInAuthentication googleSignInAuthentication= await googleSignInAccount.authentication;
 
@@ -51,11 +64,10 @@ class _AuthPage extends State<AuthPage> {
     setState(() {
       isSignIn=true;
     });
-
-
+    Navigator.pushReplacementNamed(context, HomePage.id);
   }
-  Future<void> googleSignOut()async
-  {
+
+  Future<void> googleSignOut()async {
     await _auth.signOut().then((onValue){
       _googleSignIn.signOut();
       setState(() {
@@ -64,31 +76,16 @@ class _AuthPage extends State<AuthPage> {
     });
   }
 
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser _user;
-  GoogleSignIn _googleSignIn=new GoogleSignIn();
-  bool isSignIn=false;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  AuthMode _authMode = AuthMode.Login;
-  bool _rememberMe = false;
-  String _email;
-  String _password;
-
   Widget _buildEmailTF() {
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Email',
-            style: kLabelStyle,
-          ),
-          SizedBox(height: 10.0),
-          Container(
-            alignment: Alignment.centerLeft,
-            decoration: kBoxDecorationStyle,
-            height: 50.0,
-            child: TextFormField(
+      child: Container(
+        alignment: Alignment.centerLeft,
+        decoration: kBoxDecorationStyle,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 10.0),
+            TextFormField(
               validator: (String value) {
                 if (!RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                         .hasMatch(value)) {
@@ -108,38 +105,32 @@ class _AuthPage extends State<AuthPage> {
               ),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.email,
                   color: Colors.white,
                 ),
-                hintText: 'Enter your Email',
+                hintText: 'E-mail',
                 hintStyle: kHintTextStyle,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildPasswordTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Password',
-          style: kLabelStyle,
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 50.0,
-          child: TextFormField(
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: kBoxDecorationStyle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 10.0),
+          TextFormField(
             validator: (String value) {
               if (value.length < 6) {
-                return 'Password must be invalid and +6 characters';
+                return 'Password must not be empty and +6 characters';
               }
             },
             onChanged: (String value) {
@@ -155,17 +146,16 @@ class _AuthPage extends State<AuthPage> {
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Password',
+              hintText: 'Password',
               hintStyle: kHintTextStyle,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -278,9 +268,9 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-  Widget _buildSocialBtn(AssetImage logo) {
+  Widget _buildSocialBtn({AssetImage logo,Function tap}) {
     return GestureDetector(
-      onTap:()=>_googleLogin(),
+      onTap: tap,
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -308,16 +298,8 @@ class _AuthPage extends State<AuthPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildSocialBtn(
-            AssetImage(
-              'assets/logos/facebook.jpg',
-            ),
-          ),
-          _buildSocialBtn(
-            AssetImage(
-              'assets/logos/google.jpg',
-            ),
-          ),
+          _buildSocialBtn(logo:AssetImage('assets/logos/facebook.jpg'),tap:_facebookLogin),
+          _buildSocialBtn(logo:AssetImage('assets/logos/google.jpg'),tap:_googleLogin),
         ],
       ),
     );
@@ -406,18 +388,7 @@ class _AuthPage extends State<AuthPage> {
                       _authMode == AuthMode.SignUp
                           ? Container()
                           : _buildSocialBtnRow(),
-                      isSignIn? Center(child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(_user.photoUrl),
-                          ),
-                          Text(_user.displayName),
-                          Text(_user.email),
-                          OutlineButton(onPressed: (){
-                            googleSignOut();
-                          },child: Text('Logout'),)
-                        ],
-                      ),):_buildChangeModeBtn(),
+                      _buildChangeModeBtn(),
                     ],
                   ),
                 ),
