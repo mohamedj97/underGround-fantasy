@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:fantasy/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,8 +29,7 @@ class _AuthPage extends State<AuthPage> {
   String _password;
 
 
-  void _facebookLogin()async
-  {
+  void _facebookLogin()async {
     FacebookLogin _fbLogin=new FacebookLogin();
     final result = await _fbLogin.logIn(['email']);
     FacebookAccessToken token = result.accessToken;

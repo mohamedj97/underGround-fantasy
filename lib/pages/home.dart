@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../fragments/home_fragment.dart';
 import 'package:fantasy/fragments/rules_fragment.dart';
 import '../fragments/playerprofile.dart';
+import 'package:fantasy/fragments/groups_fragment.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   final _tabs = [
     HomeFragment(),
     Container(child: Center(child: Text('Matches'),),),
-    Container(child: Center(child: Text('Groups'),),),
+    GroupsFragment(),
     HomeRulesFragment(),
     PlayerProfile(),
   ];
