@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TransitionListTile extends StatelessWidget {
-  const TransitionListTile({
+class RuleListTile extends StatelessWidget {
+  const RuleListTile({
     this.onTap,
     this.title,
   });

@@ -20,7 +20,7 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
             Expanded(
               child: ListView(
                 children: <Widget>[
-                  TransitionListTile(
+                  RuleListTile(
                     title: 'Master-Branch',
                     onTap: () async{
                       setState(() {
@@ -32,7 +32,7 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
                           builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Master-Branch'));
                     },
                   ),
-                  TransitionListTile(
+                  RuleListTile(
                     title: 'Goals Conceded',
                     onTap: ()async{
                       setState(() {
@@ -44,7 +44,7 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
                           builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goals Conceded'));
                     },
                   ),
-                  TransitionListTile(
+                  RuleListTile(
                     title: 'Goal keeping',
                     onTap: () async{
                       setState(() {
@@ -56,7 +56,7 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
                           builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goal keeping'));
                     },
                   ),
-                  TransitionListTile(
+                  RuleListTile(
                     title: 'Groups/Join Groups',
                     onTap: () async{
                       setState(() {
@@ -68,7 +68,7 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
                           builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Groups/Join Groups'));
                     },
                   ),
-                  TransitionListTile(
+                  RuleListTile(
                     title: 'Squad-Instructions',
                     onTap: () async{
                       setState(() {
@@ -81,7 +81,7 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
                           builder:(context)=> RuleDescriptionModal(ruleNumber,'Squad-Instructions'));
                     },
                   ),
-                  TransitionListTile(
+                  RuleListTile(
                     title: 'Notifications',
                     onTap: () async{
                       setState(() {
