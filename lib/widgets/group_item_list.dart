@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fantasy/pages/group_page.dart';
+import 'package:flutter/scheduler.dart';
 
 class GroupItemList extends StatelessWidget {
   final String groupName;
@@ -16,7 +18,8 @@ class GroupItemList extends StatelessWidget {
             ,subtitle:Text(groupOwner),
             trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
         onTap: (){
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => OpenContainerTransformDemo()));
+          timeDilation = 3;
+          Navigator.pushNamed(context,GroupPage.id);
         },),
       ),
     );

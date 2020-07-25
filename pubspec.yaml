@@ -55,6 +55,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/cavk.png
+    - assets/squad.png
     - assets/bg.png
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
