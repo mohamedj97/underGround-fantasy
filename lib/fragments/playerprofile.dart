@@ -14,6 +14,10 @@ class _PlayerProfileState extends State<PlayerProfile> {
   String _imageUrl;
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
+  final _emailController =TextEditingController();
+  final _usernameController =TextEditingController();
+
+
 
   void getCurrentUser() async
   {
@@ -77,203 +81,135 @@ class _PlayerProfileState extends State<PlayerProfile> {
 
 
     return Scaffold(
-      body: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: CircleAvatar(
-                  radius: 100.0,
-                  backgroundColor: Color(0xff476cfb),
-                  child: ClipOval(
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    radius: 100.0,
+                    backgroundColor: Color(0xff476cfb),
+                    child: ClipOval(
 
-                      child: new SizedBox(
-                        width: 180.0,
-                        height: 180.0,
-                        child: imagecheck(),
-                      )
+                        child: new SizedBox(
+                          width: 180.0,
+                          height: 180.0,
+                          child: imagecheck(),
+                        )
+                    ),
                   ),
                 ),
-              ),
-              Padding(
+                Padding(
 
-                  padding:EdgeInsets.only(top: 60.0),
-                  child: IconButton(icon:Icon(Icons.add_a_photo,size: 30.0),
-                    onPressed:()
-                    {
-                      getImage();
-                    },
+                    padding:EdgeInsets.only(top: 60.0),
+                    child: IconButton(icon:Icon(Icons.add_a_photo,size: 30.0),
+                      onPressed:()
+                      {
+                        getImage();
+                      },
 
-                  )
+                    )
 
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("UserName",
-                          style: TextStyle(
-                              color: Colors.blueAccent,fontSize: 18.0
-                          ),),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Container(
+                width: 360,
+                child: TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                          borderRadius: BorderRadius.all(Radius.circular(25))
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(loggedInUser.uid,
-                            style: TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold)),
+                      focusedBorder:OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(30))
                       ),
-                    ],
+                      prefixIcon: Icon(Icons.mail),
+                      hintText: "Email",
+                      filled: true,
+                      fillColor: Colors.grey
                   ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  child: Icon(
-                    Icons.edit,
-                    color: Color(0xff476cfb),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("Email",
-                          style: TextStyle(
-                              color: Colors.blueAccent,fontSize: 18.0
-                          ),),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('GasserAshraf977@gmail.com',
-                            style: TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  child: Icon(
-                    Icons.edit,
-                    color: Color(0xff476cfb),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("Password",
-                          style: TextStyle(
-                              color: Colors.blueAccent,fontSize: 18.0
-                          ),),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('*********',
-                            style: TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  child: Icon(
-                    Icons.edit,
-                    color: Color(0xff476cfb),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-              height: 30.0
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              RaisedButton(
-                color: Color(0xff476cfb),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                elevation: 4.0,
-                splashColor: Colors.blueGrey,
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: Colors.white, fontSize: 16.0),
-                ),
-              ),
-              RaisedButton(
-                color: Color(0xff476cfb),
-                onPressed: () {
-                  print("upload");
-                  uploadPic(context);
-                },
+                )
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Container(
+                width: 360,
+                child: TextField(
+                  controller: _usernameController,
 
-                elevation: 4.0,
-                splashColor: Colors.blueGrey,
-                child: Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white, fontSize: 16.0),
-                ),
-              ),
-
-            ],
-          )
-        ],
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                          borderRadius: BorderRadius.all(Radius.circular(25))
+                      ),
+                      focusedBorder:OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(30))
+                      ),
+                      prefixIcon: Icon(Icons.person),
+                      hintText: "Username",
+                      filled: true,
+                      fillColor: Colors.grey
+                  ),
+                )
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Card(
+              color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                child: ListTile(
+                  onTap:()=> uploadPic(context),
+                  leading: Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ),
+                  title: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.blue.shade900,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 20.0,
+                    ),
+                  ),
+                )),
+            SizedBox(
+              height: 30.0,
+            ),
+            Card(
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                child: ListTile(
+                  onTap:()=> print("hello"),
+                  leading: Icon(
+                    Icons.check,
+                    color: Colors.red,
+                  ),
+                  title: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.blue.shade900,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 20.0,
+                    ),
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }
