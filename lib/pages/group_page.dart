@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fantasy/tabs/group/rank_table.dart';
 import 'package:fantasy/tabs/group/squad_tab.dart';
+import 'package:fantasy/tabs/group/members_tab.dart';
 
 class GroupPage extends StatefulWidget {
 
@@ -27,7 +28,7 @@ class _GroupPageState extends State<GroupPage> {
         ),
         body: TabBarView(children: [
           SquadTab(),
-          Icon(Icons.email),
+          MembersTab(),
           RankTab(),
         ]),
       )),

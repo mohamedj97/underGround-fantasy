@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:fantasy/widgets/rank_tab_item.dart';
 class RankTab extends StatefulWidget {
   @override
   _RankTabState createState() => _RankTabState();
@@ -16,12 +16,12 @@ class _RankTabState extends State<RankTab> {
       child: Column(
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.all(8.0),
-            height: 70,
+            padding:EdgeInsets.all(8),
+            height: 60,
             child: Card(
               color: Colors.white70,
               child: Container(
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(6),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -47,26 +47,14 @@ class _RankTabState extends State<RankTab> {
               ),
             ),
           ),
-//          ListView.builder(itemCount: teamNames.length,
-//              itemBuilder: (context,index){
-//            return ListItem(teamNames[index]);})
+          Expanded(
+            child: ListView.builder(itemCount: teamNames.length,
+                itemBuilder: (context,index){
+              return RankTabItem(teamNames[index]);}),
+          )
         ],
       ),
     );
   }
 }
-class ListItem extends StatelessWidget {
-  final String title;
-  ListItem(this.title);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(8.0),
-    child: Row(
-      children: <Widget>[
-        ListTile(leading: Text('1'),title: Text(title),trailing: Text('50'),)
-      ],
-    ),
-    );
-  }
-}

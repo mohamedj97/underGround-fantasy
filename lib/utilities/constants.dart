@@ -38,11 +38,8 @@ final kBoxDecorationStyle = BoxDecoration(
   ],
 );
 
-//            decoration: BoxDecoration(
-//                        image: DecorationImage(
-//                          fit: BoxFit.cover,
-//                          colorFilter: ColorFilter.mode(
-//                              Colors.white.withOpacity(0.5), BlendMode.dstATop),
-//                          image: AssetImage('assets/cavk.png'),
-//                        ),
-//                      ),
+final kLabelGroupStyle=TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  color: Colors.black,
+);
