@@ -56,7 +56,9 @@ flutter:
   assets:
     - assets/cavk.png
     - assets/squad.png
+    - assets/player.png
     - assets/bg.png
+    - assets/substitution.png
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
     - assets/giphy.gif

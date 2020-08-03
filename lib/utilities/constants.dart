@@ -39,7 +39,28 @@ final kBoxDecorationStyle = BoxDecoration(
 );
 
 final kLabelGroupStyle=TextStyle(
-    fontWeight: FontWeight.bold,
+fontWeight: FontWeight.bold,
     fontSize: 20,
+    color: Colors.black,
+);
+final kLabelPlayerNameStyle=TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+  color: Colors.white,
+);
+final kPlayerNameBoxDecoration=BoxDecoration(
+  color: Color.fromRGBO(0,117,58,1),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black12,
+      blurRadius: 6.0,
+      offset: Offset(0, 2),
+    ),
+  ],
+);
+final kLabelPlayerPointsStyle=TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
   color: Colors.black,
 );
+final kPlayerSquadImage=Image.asset('assets/player.png',height: 80,);
