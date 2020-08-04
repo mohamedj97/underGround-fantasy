@@ -64,3 +64,9 @@ final kLabelPlayerPointsStyle=TextStyle(
   color: Colors.black,
 );
 final kPlayerSquadImage=Image.asset('assets/player.png',height: 80,);
+const Color kActiveCardColor=Color(0xFF1D1E33);
+const Color kInActiveCardColor= Color(0xFF111328);
+const kLargeButtonStyle=TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 25,
+);

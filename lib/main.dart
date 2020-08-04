@@ -4,6 +4,7 @@ import 'package:fantasy/pages/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:fantasy/pages/SplashScreen.dart';
 import 'package:fantasy/pages/group_page.dart';
+import 'package:fantasy/pages/set_member_points.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         LoadingPage.id :(BuildContext context) =>LoadingPage(),
         SplashScreen.id :(BuildContext context) =>SplashScreen(),
         GroupPage.id :(BuildContext context) =>GroupPage(),
+        SetMemberPoints.id :(BuildContext context) =>SetMemberPoints(),
       },
     );
   }

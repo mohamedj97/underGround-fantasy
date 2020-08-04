@@ -1,19 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fantasy/utilities/constants.dart';
+import 'package:fantasy/models/transfers.dart';
 class SquadTab extends StatefulWidget {
   @override
   _SquadTabState createState() => _SquadTabState();
 }
 
 class _SquadTabState extends State<SquadTab> {
+
+  Transfers _transfersMode=Transfers.Off;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title:Text('Valhalla'),centerTitle: true,actions: <Widget>[
+//        Center(child: Text('Tab to',style: TextStyle(color: Color.fromRGBO(134, 181, 51,1),fontSize: 20),)),
+//        Center(child: Text('Transfers',style:TextStyle(color: Color.fromRGBO(247, 62, 66,1),fontSize: 20),)),
         GestureDetector(
           onTap: (){
-            print('subsubsubsubsub');
+            setState(() {
+              _transfersMode =
+              _transfersMode == Transfers.Off ? Transfers.On : Transfers.Off;
+              print('Transfeeeeers${_transfersMode}');
+            });
           },
             child: Image.asset('assets/substitution.png')),
       ],),
@@ -37,6 +47,10 @@ class _SquadTabState extends State<SquadTab> {
                     width: 80,
                     height: 15,
                     child: Center(child: Text('30',style: kLabelPlayerPointsStyle,))),
+                _transfersMode==Transfers.On? GestureDetector(onTap: (){
+                  print ('make Transfers');
+                },
+                    child: Icon(Icons.add,color: Colors.black,)):Container(),
               ],
             ),
             Row(
@@ -53,6 +67,10 @@ class _SquadTabState extends State<SquadTab> {
                         width: 80,
                         height: 15,
                         child: Center(child: Text('5',style: kLabelPlayerPointsStyle,))),
+                    _transfersMode==Transfers.On?  GestureDetector(onTap: (){
+                      print ('make Transfers');
+                    },
+                        child: Icon(Icons.add,color: Colors.black,)):Container(),
                   ],
                 ),
                 SizedBox(width: 140,),
@@ -67,7 +85,11 @@ class _SquadTabState extends State<SquadTab> {
                         width: 80,
                         height: 15,
                         child: Center(child: Text('90',style: kLabelPlayerPointsStyle,))),
-                    Icon(Icons.copyright,color: Colors.black,)
+                    Icon(Icons.copyright,color: Colors.black,),
+                    _transfersMode==Transfers.On? GestureDetector(onTap: (){
+                      print ('make Transfers');
+                    },
+                        child: Icon(Icons.add,color: Colors.black,)):Container(),
                   ],
                 ),
               ],
@@ -86,6 +108,10 @@ class _SquadTabState extends State<SquadTab> {
                         width: 80,
                         height: 15,
                         child: Center(child: Text('15',style: kLabelPlayerPointsStyle,))),
+                    _transfersMode==Transfers.On?GestureDetector(onTap: (){
+                      print ('make Transfers');
+                    },
+                        child: Icon(Icons.add,color: Colors.black,)):Container(),
                   ],
                 ),
                 SizedBox(width: 140,),
@@ -100,6 +126,10 @@ class _SquadTabState extends State<SquadTab> {
                         width: 80,
                         height: 15,
                         child: Center(child: Text('33',style: kLabelPlayerPointsStyle,))),
+                    _transfersMode==Transfers.On?GestureDetector(onTap: (){
+                      print ('make Transfers');
+                    },
+                        child: Icon(Icons.add,color: Colors.black,)):Container(),
                   ],
                 ),
               ],

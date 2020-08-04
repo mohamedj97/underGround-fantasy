@@ -1,0 +1,4 @@
+enum Transfers{
+  On,
+  Off,
+}
