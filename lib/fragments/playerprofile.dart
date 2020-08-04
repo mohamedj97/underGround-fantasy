@@ -15,7 +15,8 @@ class _PlayerProfileState extends State<PlayerProfile> {
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
   final _emailController =TextEditingController();
-  final _usernameController =TextEditingController();
+  final _userNameController =TextEditingController();
+  final _teamNameController =TextEditingController();
 
 
 
@@ -48,10 +49,12 @@ class _PlayerProfileState extends State<PlayerProfile> {
 
   void initState() {
     super.initState();
-    getCurrentUser();
-    var ref = FirebaseStorage.instance.ref().child("/ProfileImages/333").child("333");
+    //getCurrentUser();
+    var ref = FirebaseStorage.instance.ref().child("/ProfileImages").child("33");
     _image=null;
     ref.getDownloadURL().then((loc) => setState(() => _imageUrl = loc));
+
+
   }
   @override
 
@@ -70,7 +73,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
 
     Future uploadPic(BuildContext context) async{
       String fileName = "333";
-      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("/ProfileImages/333").child(fileName);
+      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("/ProfileImages").child(fileName);
       StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
       StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
       setState(() {
@@ -148,7 +151,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
             Container(
                 width: 360,
                 child: TextField(
-                  controller: _usernameController,
+                  controller: _userNameController,
 
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -169,45 +172,75 @@ class _PlayerProfileState extends State<PlayerProfile> {
             SizedBox(
               height: 30.0,
             ),
-            Card(
-              color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: ListTile(
-                  onTap:()=> uploadPic(context),
-                  leading: Icon(
-                    Icons.check,
-                    color: Colors.green,
+            Container(
+                width: 360,
+                child: TextField(
+                  controller: _teamNameController,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                          borderRadius: BorderRadius.all(Radius.circular(25))
+                      ),
+                      focusedBorder:OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(30))
+                      ),
+                      prefixIcon: Icon(Icons.group),
+                      hintText: "Teamname",
+                      filled: true,
+                      fillColor: Colors.grey
                   ),
-                  title: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.blue.shade900,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 20.0,
-                    ),
-                  ),
-                )),
-            SizedBox(
-              height: 30.0,
+                )
             ),
-            Card(
+            SizedBox(
+              height: 20.0,
+            ),
+            GestureDetector(
+              child: Card(
                 color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: ListTile(
-                  onTap:()=> print("hello"),
-                  leading: Icon(
-                    Icons.check,
-                    color: Colors.red,
-                  ),
-                  title: Text(
-                    'Cancel',
-                    style: TextStyle(
-                      color: Colors.blue.shade900,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 20.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  child: ListTile(
+                    onTap:(){
+                      print(_userNameController.text);
+                      uploadPic(context);
+                      },
+                    leading: Icon(
+                      Icons.check,
+                      color: Colors.green,
                     ),
-                  ),
-                )),
+                    title: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.blue.shade900,
+                        fontFamily: 'Source Sans Pro',
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  )),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            GestureDetector(
+              child: Card(
+                  color: Colors.white,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  child: ListTile(
+                    onTap:()=> print("hello"),
+                    leading: Icon(
+                      Icons.check,
+                      color: Colors.red,
+                    ),
+                    title: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Colors.blue.shade900,
+                        fontFamily: 'Source Sans Pro',
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  )),
+            ),
           ],
         ),
       ),
