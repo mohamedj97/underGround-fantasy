@@ -14,9 +14,8 @@ class _SquadTabState extends State<SquadTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text('Valhalla'),centerTitle: true,actions: <Widget>[
-//        Center(child: Text('Tab to',style: TextStyle(color: Color.fromRGBO(134, 181, 51,1),fontSize: 20),)),
-//        Center(child: Text('Transfers',style:TextStyle(color: Color.fromRGBO(247, 62, 66,1),fontSize: 20),)),
+      appBar: AppBar(title:Text('65',style: TextStyle(fontSize:40,color: Color.fromRGBO(0,255,135,1))
+        ,),centerTitle: true,actions: <Widget>[
         GestureDetector(
           onTap: (){
             setState(() {

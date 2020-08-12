@@ -7,10 +7,10 @@ class MembersTab extends StatefulWidget {
 }
 
 class _MembersTabState extends State<MembersTab> {
-  List<Map<String,dynamic>> groupMembers=[{'name':'Jimmy','lastScore':20,'overallScore':170},
-    {'name':'Gasser','lastScore':20,'overallScore':170},{'name':'Ashraf','lastScore':20,'overallScore':170},
-    {'name':'Roshdy','lastScore':20,'overallScore':170},{'name':'Salem','lastScore':20,'overallScore':170},
-    {'name':'Amr','lastScore':20,'overallScore':170},{'name':'Samir','lastScore':20,'overallScore':170}];
+  List<Map<String,dynamic>> groupMembers=[{'name':'Jimmy','lastScore':20,'overallScore':170,'price':2},
+    {'name':'Gasser','lastScore':20,'overallScore':170,'price':6},{'name':'Ashraf','lastScore':20,'overallScore':170,'price':4},
+    {'name':'Roshdy','lastScore':20,'overallScore':170,'price':8},{'name':'Salem','lastScore':20,'overallScore':170,'price':6},
+    {'name':'Amr','lastScore':20,'overallScore':170,'price':7},{'name':'Samir','lastScore':20,'overallScore':170,'price':4}];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +31,8 @@ class _MembersTabState extends State<MembersTab> {
                       Row(
                         children: <Widget>[
                           Text('Name',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                          SizedBox(width: 100,),
+                          SizedBox(width: 85,),
+                          Text('Price',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
                         ],
                       ),
 
@@ -39,7 +40,7 @@ class _MembersTabState extends State<MembersTab> {
                         children: <Widget>[
                           Text('Last',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
                           SizedBox(
-                            width: 70,
+                            width: 40,
                           ),
                           Text('Total',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
                         ],
@@ -53,7 +54,8 @@ class _MembersTabState extends State<MembersTab> {
               child: ListView.builder(itemCount:groupMembers.length,
                   itemBuilder: (context,index){
                 return MemberTabListItem(memberName: groupMembers[index]['name'],
-                  lastScore: groupMembers[index]['lastScore'],overallScore: groupMembers[index]['overallScore'],);
+                  lastScore: groupMembers[index]['lastScore'],overallScore: groupMembers[index]['overallScore']
+                  ,price: groupMembers[index]['price'],);
               }),
             ),
           ],

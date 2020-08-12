@@ -7,7 +7,8 @@ class MemberTabListItem extends StatefulWidget {
   final String memberName;
   final int lastScore;
   final int overallScore;
-  MemberTabListItem({this.memberName,this.lastScore,this.overallScore});
+  final int price;
+  MemberTabListItem({this.memberName,this.lastScore,this.overallScore,this.price});
 
   @override
   _MemberTabListItemState createState() => _MemberTabListItemState();
@@ -30,7 +31,7 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
         });
       },
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(8),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: const BorderRadius.all(
@@ -39,21 +40,30 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
           ),
           elevation: 10,
           color: Colors.white70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(widget.memberName,style: kLabelGroupStyle),
-              ),
-              Row(
-                children: <Widget>[
-                  Text(widget.lastScore.toString(),style: kLabelGroupStyle),
-                  SizedBox(width: 90),
-                  Text(widget.overallScore.toString(),style: kLabelGroupStyle),
-                ],
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(widget.memberName,style: kLabelGroupStyle),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text('${widget.price.toString()} \$',style: kLabelGroupStyle),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(widget.lastScore.toString(),style: kLabelGroupStyle),
+                    SizedBox(width: 55),
+                    Text(widget.overallScore.toString(),style: kLabelGroupStyle),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
