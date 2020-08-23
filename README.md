@@ -1,6 +1,6 @@
-# fantasy
+# UnderGround Fantasy
 
-A new Flutter application.
+Flutter Application developed with dart depends on competition between friends as they play football together and they make teams within each others to gain points to start ranking up among themeslves as thier teams consist of them like fantasy Preimier League but the players are group of friends each group has a creator who creates the group, sets prices and set points after every match 
 
 ## Getting Started
 
