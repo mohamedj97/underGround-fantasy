@@ -1,6 +1,7 @@
 import 'package:fantasy/pages/auth.dart';
 import 'package:fantasy/pages/home.dart';
 import 'package:fantasy/pages/loading.dart';
+import 'package:fantasy/tabs/group/members_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:fantasy/pages/SplashScreen.dart';
 import 'package:fantasy/pages/group_page.dart';

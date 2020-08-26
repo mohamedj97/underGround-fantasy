@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fantasy/utilities/constants.dart';
 import 'package:fantasy/models/transfers.dart';
+import 'package:fantasy/widgets/player_in_squad.dart';
 class SquadTab extends StatefulWidget {
   @override
   _SquadTabState createState() => _SquadTabState();
@@ -10,6 +10,9 @@ class SquadTab extends StatefulWidget {
 class _SquadTabState extends State<SquadTab> {
 
   Transfers _transfersMode=Transfers.Off;
+  List<Map<String,dynamic>> squadPlayers=[{'name':'Salem','score':30},
+    {'name':'Amr','score':5},{'name':'Marwan','score':50},
+    {'name':'Jimmy','score':15},{'name':'Gedo','score':33}];
 
   @override
   Widget build(BuildContext context) {
@@ -34,103 +37,21 @@ class _SquadTabState extends State<SquadTab> {
        child: Column(
          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Column(
+            PlayerInSquad(playerName:squadPlayers[0]['name'],playerScore: squadPlayers[0]['score'],transfersMode: _transfersMode,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                kPlayerSquadImage,
-                Container(decoration: kPlayerNameBoxDecoration,
-                    width: 80,
-                    height: 30,
-                    child: Center(child: Text('Salem',style: kLabelPlayerNameStyle,))),
-
-                Container(color: Color.fromRGBO(0,255,135,1),
-                    width: 80,
-                    height: 15,
-                    child: Center(child: Text('30',style: kLabelPlayerPointsStyle,))),
-                _transfersMode==Transfers.On? GestureDetector(onTap: (){
-                  print ('make Transfers');
-                },
-                    child: Icon(Icons.add,color: Colors.black,)):Container(),
+                PlayerInSquad(playerName:squadPlayers[1]['name'],playerScore: squadPlayers[1]['score'],transfersMode: _transfersMode,),
+                SizedBox(width: 140,),
+                PlayerInSquad(playerName:squadPlayers[2]['name'],playerScore: squadPlayers[2]['score'],transfersMode: _transfersMode,),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    kPlayerSquadImage,
-                    Container(color: Color.fromRGBO(0,117,58,1),
-                        width: 80,
-                        height: 30,
-                        child: Center(child: Text('Amr',style: kLabelPlayerNameStyle,))),
-                    Container(color: Color.fromRGBO(0,255,135,1),
-                        width: 80,
-                        height: 15,
-                        child: Center(child: Text('5',style: kLabelPlayerPointsStyle,))),
-                    _transfersMode==Transfers.On?  GestureDetector(onTap: (){
-                      print ('make Transfers');
-                    },
-                        child: Icon(Icons.add,color: Colors.black,)):Container(),
-                  ],
-                ),
+                PlayerInSquad(playerName:squadPlayers[3]['name'],playerScore: squadPlayers[3]['score'],transfersMode: _transfersMode,),
                 SizedBox(width: 140,),
-                Column(
-                  children: <Widget>[
-                    kPlayerSquadImage,
-                    Container(color: Color.fromRGBO(0,117,58,1),
-                        width: 80,
-                        height: 30,
-                        child: Center(child: Text('Marwan',style: kLabelPlayerNameStyle,))),
-                    Container(color: Color.fromRGBO(0,255,135,1),
-                        width: 80,
-                        height: 15,
-                        child: Center(child: Text('90',style: kLabelPlayerPointsStyle,))),
-                    Icon(Icons.copyright,color: Colors.black,),
-                    _transfersMode==Transfers.On? GestureDetector(onTap: (){
-                      print ('make Transfers');
-                    },
-                        child: Icon(Icons.add,color: Colors.black,)):Container(),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    kPlayerSquadImage,
-                    Container(color: Color.fromRGBO(0,117,58,1),
-                        width: 80,
-                        height: 30,
-                        child: Center(child: Text('Jimmy',style: kLabelPlayerNameStyle,))),
-                    Container(color: Color.fromRGBO(0,255,135,1),
-                        width: 80,
-                        height: 15,
-                        child: Center(child: Text('15',style: kLabelPlayerPointsStyle,))),
-                    _transfersMode==Transfers.On?GestureDetector(onTap: (){
-                      print ('make Transfers');
-                    },
-                        child: Icon(Icons.add,color: Colors.black,)):Container(),
-                  ],
-                ),
-                SizedBox(width: 140,),
-                Column(
-                  children: <Widget>[
-                    kPlayerSquadImage,
-                    Container(color: Color.fromRGBO(0,117,58,1),
-                        width: 80,
-                        height: 30,
-                        child: Center(child: Text('Gedo',style: kLabelPlayerNameStyle,))),
-                    Container(color: Color.fromRGBO(0,255,135,1),
-                        width: 80,
-                        height: 15,
-                        child: Center(child: Text('33',style: kLabelPlayerPointsStyle,))),
-                    _transfersMode==Transfers.On?GestureDetector(onTap: (){
-                      print ('make Transfers');
-                    },
-                        child: Icon(Icons.add,color: Colors.black,)):Container(),
-                  ],
-                ),
+                PlayerInSquad(playerName:squadPlayers[4]['name'],playerScore: squadPlayers[4]['score'],transfersMode: _transfersMode,),
               ],
             ),
           ],

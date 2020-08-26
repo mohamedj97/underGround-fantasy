@@ -1,3 +1,4 @@
+import 'package:fantasy/models/transfers.dart';
 import 'package:flutter/material.dart';
 import 'package:fantasy/utilities/constants.dart';
 import 'package:fantasy/models/user_type.dart';
@@ -5,10 +6,12 @@ import 'package:fantasy/pages/set_member_points.dart';
 
 class MemberTabListItem extends StatefulWidget {
   final String memberName;
+  final Transfers transfersMode;
+  final String playerOutName;
   final int lastScore;
   final int overallScore;
   final int price;
-  MemberTabListItem({this.memberName,this.lastScore,this.overallScore,this.price});
+  MemberTabListItem({this.memberName,this.lastScore,this.overallScore,this.price,this.playerOutName,this.transfersMode});
 
   @override
   _MemberTabListItemState createState() => _MemberTabListItemState();
@@ -23,11 +26,14 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
     return GestureDetector(
       onTap: (){
         setState(() {
-          if(_userType==UserType.Master)
-          {
-            showModalBottomSheet(context: context,
-              builder:(BuildContext context)=> SetMemberPoints());
-          }
+//          if(_userType==UserType.Master)
+//          {
+//            showModalBottomSheet(context: context,
+//              builder:(BuildContext context)=> SetMemberPoints());
+//          }
+
+            print('Do you want to replace ${widget.playerOutName} with ${widget.memberName}');
+
         });
       },
       child: Container(

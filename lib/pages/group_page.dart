@@ -1,3 +1,4 @@
+import 'package:fantasy/models/transfers.dart';
 import 'package:flutter/material.dart';
 import 'package:fantasy/tabs/group/rank_table.dart';
 import 'package:fantasy/tabs/group/squad_tab.dart';
@@ -12,6 +13,7 @@ class GroupPage extends StatefulWidget {
 }
 
 class _GroupPageState extends State<GroupPage> {
+  final Transfers transfersMode=Transfers.Off;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +30,7 @@ class _GroupPageState extends State<GroupPage> {
         ),
         body: TabBarView(children: [
           SquadTab(),
-          MembersTab(),
+          MembersTab(playerOutName: '',transfersMode: transfersMode,),
           RankTab(),
         ]),
       )),
