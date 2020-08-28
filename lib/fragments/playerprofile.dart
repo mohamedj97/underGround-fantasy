@@ -22,39 +22,32 @@ class _PlayerProfileState extends State<PlayerProfile> {
 
   void getCurrentUser() async
   {
-    try{
       final user=await _auth.currentUser();
-      if(user!=null)
-      {
-        loggedInUser=user;
-        print('pppppp${user.uid}');
-      }
-    }
-    catch(e)
-    {
-      print (e);
-    }
+      var ref = FirebaseStorage.instance.ref().child("/ProfileImages").child(user.uid);
+      _image=null;
+      ref.getDownloadURL().then((loc) => setState(() => _imageUrl = loc));
+
+
+
   }
   Image imagecheck()
   {
     if(_imageUrl!=null){
+      print('i1');
       return Image.network(_imageUrl);
     }else if(_image!=null){
+      print('i2');
       return Image.file(_image);
     }else{
-      Image.asset('assets/noprofile.jpg');
+      print('i3');
+      Image.asset('assets/noimage.png');
     }
 
   }
 
   void initState() {
     super.initState();
-    //getCurrentUser();
-    var ref = FirebaseStorage.instance.ref().child("/ProfileImages").child("33");
-    _image=null;
-    ref.getDownloadURL().then((loc) => setState(() => _imageUrl = loc));
-
-
+    getCurrentUser();
   }
   @override
 
@@ -72,8 +65,8 @@ class _PlayerProfileState extends State<PlayerProfile> {
     }
 
     Future uploadPic(BuildContext context) async{
-      String fileName = "333";
-      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("/ProfileImages").child(fileName);
+      final user=await _auth.currentUser();
+      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("/ProfileImages").child(user.uid);
       StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
       StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
       setState(() {
@@ -99,10 +92,10 @@ class _PlayerProfileState extends State<PlayerProfile> {
                     radius: 100.0,
                     backgroundColor: Color(0xff476cfb),
                     child: ClipOval(
-
                         child: new SizedBox(
                           width: 180.0,
                           height: 180.0,
+
                           child: imagecheck(),
                         )
                     ),

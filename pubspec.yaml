@@ -55,6 +55,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/noprofile.jpg
     - assets/cavk.png
     - assets/squad.png
     - assets/player.png
@@ -63,7 +64,8 @@ flutter:
     - assets/logos/facebook.jpg
     - assets/logos/google.jpg
     - assets/giphy.gif
-    - assets/noprofile.jpg
+    - assets/noimage.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
