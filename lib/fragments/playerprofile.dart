@@ -59,6 +59,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
       _imageUrl=null;
 
       setState(() {
+
         _image = image;
 
       });
