@@ -57,8 +57,6 @@ class _PlayerProfileState extends State<PlayerProfile> {
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
       _imageUrl=null;
-
-
       setState(() {
 
         _image = image;
