@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'UG Fantasy',
+      title: 'UG Fantasysssssss',
       theme: ThemeData(
         brightness:Brightness.dark,
       ),

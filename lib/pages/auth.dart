@@ -45,7 +45,7 @@ class _AuthPage extends State<AuthPage> {
     setState(() {
       isSignIn=true;
     });
-    //Navigator.pushReplacementNamed(context, HomePage.id);
+    Navigator.pushReplacementNamed(context, HomePage.id);
   }
 
   Future<void> _googleLogin()async {

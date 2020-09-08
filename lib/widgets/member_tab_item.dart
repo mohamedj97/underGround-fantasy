@@ -26,11 +26,11 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
     return GestureDetector(
       onTap: (){
         setState(() {
-//          if(_userType==UserType.Master)
-//          {
-//            showModalBottomSheet(context: context,
-//              builder:(BuildContext context)=> SetMemberPoints());
-//          }
+          if(_userType==UserType.Master)
+          {
+            showModalBottomSheet(context: context,
+              builder:(BuildContext context)=> SetMemberPoints());
+          }
 
             print('Do you want to replace ${widget.playerOutName} with ${widget.memberName}');
 
