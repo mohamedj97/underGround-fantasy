@@ -35,8 +35,9 @@ class RuleDescriptionModal extends StatelessWidget {
         ),
         child: Text(_tabs[ruleNumber],
         style: TextStyle(
-          fontSize: 40,
-          color: Color(0xFDB9D9EB),
+          fontSize: 30,
+          fontFamily: "Caveat",
+          color: Colors.red,
           fontWeight: FontWeight.bold,
         ),),
       );

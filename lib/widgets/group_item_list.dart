@@ -20,6 +20,7 @@ class GroupItemList extends StatelessWidget {
         onTap: (){
           timeDilation = 3;
           Navigator.pushNamed(context,GroupPage.id);
+
         },),
       ),
     );

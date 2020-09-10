@@ -33,16 +33,12 @@ class _PlayerProfileState extends State<PlayerProfile> {
   Image imagecheck()
   {
     if(_imageUrl!=null){
-      print('i1');
       return Image.network(_imageUrl);
     }else if(_image!=null){
-      print('i2');
       return Image.file(_image);
     }else{
-      print('i3');
       Image.asset('assets/noimage.png');
     }
-
   }
 
   void initState() {
