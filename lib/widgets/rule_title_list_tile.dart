@@ -34,7 +34,7 @@ class RuleListTile extends StatelessWidget {
       title: Text(title,style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 20,
-        fontFamily: 'Pacifico',
+        fontFamily: 'Caveat',
       ),),
     );
   }

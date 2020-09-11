@@ -20,78 +20,114 @@ class _HomeRulesFragmentState extends State<HomeRulesFragment> {
             Expanded(
               child: ListView(
                 children: <Widget>[
-                  RuleListTile(
-                    title: 'Master-Branch',
-                    onTap: () async{
-                      setState(() {
-                        ruleNumber=0;
-                      });
-                      await Future<void>.delayed(const Duration(milliseconds: 200));
-                      timeDilation = 3;
-                      showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Master-Branch'));
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                    child: RuleListTile(
+                      title: 'Master-Branch',
+                      onTap: () async{
+                        setState(() {
+                          ruleNumber=0;
+                        });
+                        await Future<void>.delayed(const Duration(milliseconds: 200));
+                        timeDilation = 3;
+                        showModalBottomSheet(context: context,
+                            builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Master-Branch'));
+                      },
+                    ),
                   ),
-                  RuleListTile(
-                    title: 'Goals Conceded',
-                    onTap: ()async{
-                      setState(() {
-                        ruleNumber=1;
-                      });
-                      await Future<void>.delayed(const Duration(milliseconds: 200));
-                      timeDilation = 3;
-                      showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goals Conceded'));
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                    child: RuleListTile(
+                      title: 'Goals Conceded',
+                      onTap: ()async{
+                        setState(() {
+                          ruleNumber=1;
+                        });
+                        await Future<void>.delayed(const Duration(milliseconds: 200));
+                        timeDilation = 3;
+                        showModalBottomSheet(context: context,
+                            builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goals Conceded'));
+                      },
+                    ),
                   ),
-                  RuleListTile(
-                    title: 'Goal keeping',
-                    onTap: () async{
-                      setState(() {
-                        ruleNumber=2;
-                      });
-                      await Future<void>.delayed(const Duration(milliseconds: 200));
-                      timeDilation = 3;
-                      showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goal keeping'));
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                    child: RuleListTile(
+                      title: 'Goal keeping',
+                      onTap: () async{
+                        setState(() {
+                          ruleNumber=2;
+                        });
+                        await Future<void>.delayed(const Duration(milliseconds: 200));
+                        timeDilation = 3;
+                        showModalBottomSheet(context: context,
+                            builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Goal keeping'));
+                      },
+                    ),
                   ),
-                  RuleListTile(
-                    title: 'Groups/Join Groups',
-                    onTap: () async{
-                      setState(() {
-                        ruleNumber=3;
-                      });
-                      await Future<void>.delayed(const Duration(milliseconds: 100));
-                      timeDilation = 3;
-                      showModalBottomSheet(context: context,
-                          builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Groups/Join Groups'));
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                    child: RuleListTile(
+                      title: 'Groups/Join Groups',
+                      onTap: () async{
+                        setState(() {
+                          ruleNumber=3;
+                        });
+                        await Future<void>.delayed(const Duration(milliseconds: 100));
+                        timeDilation = 3;
+                        showModalBottomSheet(context: context,
+                            builder:(BuildContext context)=> RuleDescriptionModal(ruleNumber,'Groups/Join Groups'));
+                      },
+                    ),
                   ),
-                  RuleListTile(
-                    title: 'Squad-Instructions',
-                    onTap: () async{
-                      setState(() {
-                        ruleNumber=4;
-                      });
-                      await Future<void>.delayed(const Duration(milliseconds: 100));
-                      timeDilation = 3;
-                      showModalBottomSheet(
-                          context: context,
-                          builder:(context)=> RuleDescriptionModal(ruleNumber,'Squad-Instructions'));
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                    child: RuleListTile(
+                      title: 'Squad-Instructions',
+                      onTap: () async{
+                        setState(() {
+                          ruleNumber=4;
+                        });
+                        await Future<void>.delayed(const Duration(milliseconds: 100));
+                        timeDilation = 3;
+                        showModalBottomSheet(
+                            context: context,
+                            builder:(context)=> RuleDescriptionModal(ruleNumber,'Squad-Instructions'));
+                      },
+                    ),
                   ),
-                  RuleListTile(
-                    title: 'Notifications',
-                    onTap: () async{
-                      setState(() {
-                        ruleNumber=5;
-                      });
-                      await Future<void>.delayed(const Duration(milliseconds: 100));
-                      timeDilation = 3;
-                      showModalBottomSheet(context: context,
-                          builder:(context)=> RuleDescriptionModal(ruleNumber,'Notifications'));
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                    child: RuleListTile(
+                      title: 'notifications',
+                      onTap: () async{
+                        setState(() {
+                          ruleNumber=5;
+                        });
+                        await Future<void>.delayed(const Duration(milliseconds: 100));
+                        timeDilation = 3;
+                        showModalBottomSheet(context: context,
+                            builder:(context)=> RuleDescriptionModal(ruleNumber,'Notifications'));
+                      },
+                    ),
                   ),
                 ],
               ),

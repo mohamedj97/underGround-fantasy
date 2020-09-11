@@ -25,22 +25,24 @@ class RuleDescriptionModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          color: Colors.black26,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(30),
-            topRight: const Radius.circular(30),
-          )
+    return Card(
+      child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black26,
+            borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(30),
+              topRight: const Radius.circular(30),
+            )
+          ),
+          child: Text(_tabs[ruleNumber],
+          style: TextStyle(
+            fontSize: 26  ,
+            fontFamily: "Caveat",
+            color: Colors.white.withOpacity(0.5),
+            fontWeight: FontWeight.bold,
+          ),),
         ),
-        child: Text(_tabs[ruleNumber],
-        style: TextStyle(
-          fontSize: 30,
-          fontFamily: "Caveat",
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
-        ),),
-      );
+    );
   }
 }
 
