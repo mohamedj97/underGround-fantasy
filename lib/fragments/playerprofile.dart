@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+
 class PlayerProfile extends StatefulWidget{
   @override
   _PlayerProfileState createState() => _PlayerProfileState();
@@ -26,18 +28,15 @@ class _PlayerProfileState extends State<PlayerProfile> {
       var ref = FirebaseStorage.instance.ref().child("/ProfileImages").child(user.uid);
       _image=null;
       ref.getDownloadURL().then((loc) => setState(() => _imageUrl = loc));
-
-
-
   }
   Image imagecheck()
   {
     if(_imageUrl!=null){
-      return Image.network(_imageUrl);
+      return Image.network(_imageUrl,height: 150,width: 150,fit: BoxFit.cover);
     }else if(_image!=null){
-      return Image.file(_image);
+      return Image.file(_image,height: 150,width: 150,fit: BoxFit.cover);
     }else{
-      Image.asset('assets/noimage.png');
+      Image.asset('assets/noimage.png',height: 150,width: 150,fit: BoxFit.cover);
     }
   }
 
@@ -85,29 +84,22 @@ class _PlayerProfileState extends State<PlayerProfile> {
                 Align(
                   alignment: Alignment.center,
                   child: CircleAvatar(
-                    radius: 100.0,
-                    backgroundColor: Color(0xff476cfb),
+                    radius: 70.0,
+                    backgroundColor: Colors.black26,
                     child: ClipOval(
-                        child: new SizedBox(
-                          width: 180.0,
-                          height: 180.0,
-
-                          child: imagecheck(),
-                        )
+                      child: imagecheck(),
                     ),
                   ),
                 ),
                 Padding(
-
                     padding:EdgeInsets.only(top: 60.0),
-                    child: IconButton(icon:Icon(Icons.add_a_photo,size: 30.0),
+                    child: IconButton(
+                      icon:Icon(Icons.add_a_photo),
                       onPressed:()
                       {
                         getImage();
                       },
-
-                    )
-
+                    ),
                 )
               ],
             ),

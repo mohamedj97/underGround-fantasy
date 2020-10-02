@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fantasy/utilities/constants.dart';
 import 'package:fantasy/tabs/group/members_tab.dart';
 import 'package:fantasy/models/transfers.dart';
-class PlayerInSquad extends StatelessWidget {
 
+class PlayerInSquad extends StatelessWidget {
   final String playerName;
   final int playerScore;
   final Transfers transfersMode;
 
   PlayerInSquad({this.playerName, this.playerScore, this.transfersMode});
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(

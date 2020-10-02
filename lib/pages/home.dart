@@ -6,6 +6,7 @@ import '../fragments/home_fragment.dart';
 import 'package:fantasy/fragments/rules_fragment.dart';
 import '../fragments/playerprofile.dart';
 import 'package:fantasy/fragments/groups_fragment.dart';
+import 'package:fantasy/fragments/profile.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'HomePage';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     Container(child: Center(child: Text('Matches'),),),
     GroupsFragment(),
     HomeRulesFragment(),
-    PlayerProfile(),
+    Profile(),
   ];
 
   @override
