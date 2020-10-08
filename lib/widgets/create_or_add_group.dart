@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 
-class CreatingOrAddingGroup extends StatelessWidget {
+
+class CreatingOrAddingGroup extends StatefulWidget {
   const CreatingOrAddingGroup({this.includeMarkAsDoneButton = true});
 
   final bool includeMarkAsDoneButton;
+
+  @override
+  _CreatingOrAddingGroupState createState() => _CreatingOrAddingGroupState();
+}
+
+class _CreatingOrAddingGroupState extends State<CreatingOrAddingGroup> {
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +61,7 @@ class CreatingOrAddingGroup extends StatelessWidget {
                         duration: Duration(milliseconds:700),
                       ),
                     ),
-                    onTap: (startLoading, stopLoading, btnState) {
+                    onTap: (startLoading, stopLoading, btnState) async{
                       if(btnState != ButtonState.Idle)
                       {
                         stopLoading();
@@ -61,10 +69,9 @@ class CreatingOrAddingGroup extends StatelessWidget {
                       if(btnState == ButtonState.Idle){
                         startLoading();
                         //awit Ay7AGA
-                        // stopLoading();
+                         stopLoading();
                       }
                     }
-
                 ),
               ],),
             Column(

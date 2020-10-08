@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fantasy/pages/SplashScreen.dart';
 import 'package:fantasy/pages/group_page.dart';
 import 'package:fantasy/pages/set_member_points.dart';
-import 'package:fantasy/fragments/profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,10 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness:Brightness.dark,
       ),
-      home: AuthPage(),
+      home: HomePage(),
 
       routes: {
-        Profile.id :(BuildContext context) =>Profile(),
         AuthPage.id :(BuildContext context) =>AuthPage(),
         HomePage.id :(BuildContext context) =>HomePage(),
         LoadingPage.id :(BuildContext context) =>LoadingPage(),
