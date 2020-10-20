@@ -27,7 +27,13 @@ class PlayerInSquad extends StatelessWidget {
           print('kokokkokookoko');
           Navigator.push(context,  MaterialPageRoute(builder: (context)=>MembersTab(playerOutName: playerName,transfersMode: transfersMode,)));
         },
-            child: ImageIcon(AssetImage("assets/AddPlayer.png"),size: 35.0,)):Container(),
+            child: Image(image: new AssetImage("assets/AddPlayer.png"),
+              height: 30,
+              width: 50,
+              color: null,
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.center,
+            )):Container(),
       ],
     );
   }

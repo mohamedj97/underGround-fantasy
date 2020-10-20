@@ -164,12 +164,14 @@ class _ProfileState extends State<Profile> {
                 height: 10.0,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
+
                   RaisedButton(
                     onPressed: () {},
                     color: Colors.red,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    padding: EdgeInsets.symmetric(horizontal: 40),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
@@ -180,6 +182,9 @@ class _ProfileState extends State<Profile> {
                           letterSpacing: 2.2,
                           color: Colors.white),
                     ),
+                  ),
+                  SizedBox(
+                    width: 20,
                   ),
                   RaisedButton(
                     onPressed: () {
