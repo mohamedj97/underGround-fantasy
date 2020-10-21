@@ -23,8 +23,8 @@ AlertDialog transfer_Player(String player1,String player2){
     title:Text("Transfer"),
     content: Text("Do you Want to replace $player1 with $player2 ??"),
     actions: <Widget>[
-      FlatButton(onPressed: (){}, child: Text("No"),color: Colors.red,),
-      FlatButton(onPressed: (){}, child: Text("Yes"),color: Colors.green),
+      FlatButton(onPressed: (){}, child: Text("No"),color: Colors.red,shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),),
+      FlatButton(onPressed: (){}, child: Text("Yes"),color: Colors.green,shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),),
     ],
     elevation: 24.0,
     backgroundColor: Colors.blue,
