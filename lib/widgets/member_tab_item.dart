@@ -17,6 +17,24 @@ class MemberTabListItem extends StatefulWidget {
   _MemberTabListItemState createState() => _MemberTabListItemState();
 }
 
+
+AlertDialog transfer_Player(String player1,String player2){
+  return AlertDialog(
+    title:Text("Transfer"),
+    content: Text("Do you Want to replace $player1 with $player2 ??"),
+    actions: <Widget>[
+      FlatButton(onPressed: (){}, child: Text("No"),color: Colors.red,),
+      FlatButton(onPressed: (){}, child: Text("Yes"),color: Colors.green),
+    ],
+    elevation: 24.0,
+    backgroundColor: Colors.blue,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20.0))
+    ),
+
+  );
+}
+
 class _MemberTabListItemState extends State<MemberTabListItem> {
 
   UserType _userType =UserType.Master;
@@ -26,14 +44,14 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
     return GestureDetector(
       onTap: (){
         setState(() {
-          if(_userType==UserType.Master)
+         /* if(_userType==UserType.Master)
           {
             showModalBottomSheet(context: context,
               builder:(BuildContext context)=> SetMemberPoints());
-          }
+          }*/
 
-            print('Do you want to replace ${widget.playerOutName} with ${widget.memberName}');
-
+          //  print('Do you want to replace ${widget.playerOutName} with ${widget.memberName}');
+            showDialog(context: context,builder: (_)=>transfer_Player(widget.playerOutName, widget.memberName));
         });
       },
       child: Container(

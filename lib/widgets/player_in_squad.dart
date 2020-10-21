@@ -3,6 +3,20 @@ import 'package:fantasy/utilities/constants.dart';
 import 'package:fantasy/tabs/group/members_tab.dart';
 import 'package:fantasy/models/transfers.dart';
 
+
+AlertDialog Addplayer(){
+  return AlertDialog(
+    title:Text("Transfer"),
+    content: Text("Do you Want to add this Player to your Team ??"),
+    actions: <Widget>[
+      FlatButton(onPressed: null, child: Text("No")),
+      FlatButton(onPressed: null, child: Text("Yes")),
+    ],
+    elevation: 24.0,
+    backgroundColor: Colors.white,
+  );
+}
+
 class PlayerInSquad extends StatelessWidget {
   final String playerName;
   final int playerScore;
