@@ -37,6 +37,7 @@ class _GroupPageState extends State<GroupPage> {
                   child: Icon(Icons.share),
                   onTap:(){
                     Share.share("Hello");
+
                   },
 
                 ))
