@@ -7,6 +7,7 @@ import 'package:fantasy/tabs/group/rank_table.dart';
 import 'package:fantasy/tabs/group/squad_tab.dart';
 import 'package:fantasy/tabs/group/members_tab.dart';
 import 'package:fantasy/widgets/match_notification_body.dart';
+import 'package:share/share.dart';
 
 const double _fabDimension = 56.0;
 
@@ -64,6 +65,19 @@ class _GroupPageState extends State<GroupPage> {
               Tab(text: 'Members',icon:Icon(Icons.group),),
               Tab(text: 'Rank',icon:Icon(Icons.format_list_numbered),),
             ]),
+             actions: <Widget>[
+               Container(
+                   padding: EdgeInsets.only(right: 20),
+                   child: GestureDetector(
+
+                     child: Icon(Icons.share),
+                     onTap:(){
+                       Share.share("Hello");
+
+                     },
+
+                   ))
+             ],
           ),
           body: TabBarView(children: [
             SquadTab(),
