@@ -2,7 +2,6 @@ import 'package:fantasy/models/transfers.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:fantasy/widgets/create_or_add_group.dart';
 import 'package:fantasy/tabs/group/rank_table.dart';
 import 'package:fantasy/tabs/group/squad_tab.dart';
 import 'package:fantasy/tabs/group/members_tab.dart';

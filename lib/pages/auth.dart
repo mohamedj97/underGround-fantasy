@@ -8,6 +8,7 @@ import 'package:fantasy/models/auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPage extends StatefulWidget {
   static const String id = 'AuthPage';
@@ -27,6 +28,9 @@ class _AuthPage extends State<AuthPage> {
   bool _rememberMe = false;
   String _email;
   String _password;
+  bool _isLoading=false;
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
 
 
   void _facebookLogin()async {
@@ -84,17 +88,15 @@ class _AuthPage extends State<AuthPage> {
           children: <Widget>[
             SizedBox(height: 10.0),
             TextFormField(
+              controller: emailController,
               validator: (String value) {
                 if (!RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                         .hasMatch(value)) {
                   return 'Please enter a valid email';
                 }
               },
-              onChanged: (String value) {
-                _email = value;
-              },
               onSaved: (String value) {
-                _email = value;
+                emailController.text = value;
               },
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
@@ -126,16 +128,14 @@ class _AuthPage extends State<AuthPage> {
         children: <Widget>[
           SizedBox(height: 10.0),
           TextFormField(
+            controller: passwordController,
             validator: (String value) {
-              if (value.length < 6) {
-                return 'Password must not be empty and +6 characters';
+              if (value.trim().isEmpty) {
+                return 'Password needed';
               }
             },
-            onChanged: (String value) {
-              _password = value;
-            },
               onSaved:  (String value) {
-              _email = value;
+                passwordController.text = value;
             },
             obscureText: true,
             style: TextStyle(
@@ -215,12 +215,10 @@ class _AuthPage extends State<AuthPage> {
                   Navigator.pushReplacementNamed(context, HomePage.id);
                 }
               } else if (_authMode == AuthMode.Login) {
-                final user = await _auth.signInWithEmailAndPassword(
-                    email: _email, password: _password);
-
-                if (user != null) {
-                  Navigator.pushReplacementNamed(context, HomePage.id);
-                }
+                setState(() {
+                  _isLoading = true;
+                });
+               await signIn(emailController.text, passwordController.text);
               }
             } catch (e) {
               print(e);
@@ -335,6 +333,33 @@ class _AuthPage extends State<AuthPage> {
         ),
       ),
     );
+  }
+
+  signIn(String email, pass) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map data = {
+      'email': email,
+      'password': pass
+    };
+    var jsonResponse = null;
+    var response = await http.post("ameenfantasy.herokuapp.com/user/signin", body: data,headers:{'Content-Type': 'application/json'});
+    print(response);
+    if(response.statusCode == 200) {
+      jsonResponse = json.decode(response.body);
+      if(jsonResponse != null) {
+        setState(() {
+          _isLoading = false;
+        });
+      await sharedPreferences.setString("token", jsonResponse['authToken']);
+        //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => MainPage()), (Route<dynamic> route) => false);
+      }
+    }
+    else {
+      setState(() {
+        _isLoading = false;
+      });
+      print(response.body);
+    }
   }
 
   @override
