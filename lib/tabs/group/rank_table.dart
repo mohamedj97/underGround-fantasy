@@ -7,56 +7,54 @@ class RankTab extends StatefulWidget {
 
 class _RankTabState extends State<RankTab> {
 
-  List<Map<String,dynamic>> teamNames=[{'position':1,'name':'Jimmy','lastPoints':20,'totalPoints':170},
-    {'position':2,'name':'Gasser','lastPoints':20,'totalPoints':170},{'position':3,'name':'Ashraf','lastPoints':20,'totalPoints':170},
-    {'position':4,'name':'Roshdy','lastPoints':20,'totalPoints':170},{'position':5,'name':'Salem','lastPoints':20,'totalPoints':170},
-    {'position':6,'name':'Amr','lastPoints':20,'totalPoints':170},{'position':7,'name':'Samir','lastPoints':20,'totalPoints':170}];
+  List<Map<String,dynamic>> teamNames=[{'position':1,'name':'Valhalla','lastPoints':20,'totalPoints':170},
+    {'position':2,'name':'ElMafsha5a','lastPoints':20,'totalPoints':170},{'position':3,'name':'Gedo Squad','lastPoints':20,'totalPoints':170},
+    {'position':4,'name':'Oreo','lastPoints':20,'totalPoints':170},{'position':5,'name':'ElPuta','lastPoints':20,'totalPoints':170},
+    {'position':6,'name':'Nox','lastPoints':20,'totalPoints':170},{'position':7,'name':'Samiiiir','lastPoints':20,'totalPoints':170}];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromRGBO(64, 75, 96, .9),
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding:EdgeInsets.all(8),
-            height: 60,
-            child: Card(
-              color: Colors.white,
-              child: Container(
-                padding: EdgeInsets.all(6),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color.fromRGBO(64, 75, 96, .9),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding:EdgeInsets.all(8),
+              height: 60,
+              child: Card(
+                color: Colors.white,
+                child: Stack(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text('Pos',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                        SizedBox(width: 100,),
-                        Text('Team',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                      ],
-                    ),
-
-                    Row(
-                      children: <Widget>[
-                        Text('Last',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        Text('Total',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                      ],
-                    ),
+                    Positioned(
+                        top: 5,
+                        left: 5,
+                        child: Text('Pos',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                    Positioned(
+                        top: 5,
+                        left: 90,
+                        child: Text('Team',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                    Positioned(
+                        top: 5,
+                        left: 240,
+                        child: Text('Last',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                    Positioned(
+                        top: 5,
+                        left: 310,
+                        child: Text('Total',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
                     ],
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(itemCount: teamNames.length,
-                itemBuilder: (context,index){
-              return RankTabItem(position: teamNames[index]['position'],teamName: teamNames[index]['name'],
-                lastPoints: teamNames[index]['lastPoints'],totalPoints: teamNames[index]['totalPoints'],);}),
-          )
-        ],
+            Expanded(
+              child: ListView.builder(itemCount: teamNames.length,
+                  itemBuilder: (context,index){
+                return RankTabItem(position: teamNames[index]['position'],teamName: teamNames[index]['name'],
+                  lastPoints: teamNames[index]['lastPoints'],totalPoints: teamNames[index]['totalPoints'],);}),
+            )
+          ],
+        ),
       ),
     );
   }

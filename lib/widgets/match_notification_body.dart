@@ -108,7 +108,6 @@ class _MatchNotificationState extends State<MatchNotification> {
                                 _dateTime=date;
                                 DateFormat dateFormat = DateFormat("dd-MM-yyyy");
                                 dateFormat.format(_dateTime);
-                                print(dateFormat);
                               });
                             });
                           },),

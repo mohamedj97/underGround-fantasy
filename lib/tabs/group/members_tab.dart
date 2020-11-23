@@ -26,36 +26,32 @@ class _MembersTabState extends State<MembersTab> {
       child: Scaffold(
         backgroundColor: Color.fromRGBO(64, 75, 96, .9),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                 padding:EdgeInsets.all(8),
                 height: 60,
                 child: Card(
                   color: Colors.white,
-                  child: Container(
-                    padding: EdgeInsets.all(6),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text('Name',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                            SizedBox(width: 85,),
-                            Text('Price',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                          ],
-                        ),
-
-                        Row(
-                          children: <Widget>[
-                            Text('Last',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            Text('Total',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                          ],
-                        ),
-                      ],
-                    ),
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                          top: 5,
+                          left: 5,
+                          child: Text('Name',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                      Positioned(
+                          top: 5,
+                          left: 150,
+                          child: Text('Price',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                      Positioned(
+                          top: 5,
+                          left: 240,
+                          child: Text('Last',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                      Positioned(
+                          top: 5,
+                          left: 310,
+                          child: Text('Total',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
+                    ],
                   ),
                 ),
               ),

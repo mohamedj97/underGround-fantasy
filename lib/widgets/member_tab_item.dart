@@ -55,6 +55,7 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
         });
       },
       child: Container(
+        height: 60,
         padding: EdgeInsets.all(8),
         child: Card(
           shape: RoundedRectangleBorder(
@@ -64,30 +65,25 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
           ),
           elevation: 10,
           color: Colors.white70,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(widget.memberName,style: kLabelGroupStyle),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text('${widget.price.toString()} \$',style: kLabelGroupStyle),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(widget.lastScore.toString(),style: kLabelGroupStyle),
-                    SizedBox(width: 55),
-                    Text(widget.overallScore.toString(),style: kLabelGroupStyle),
-                  ],
-                ),
-              ],
-            ),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                  top: 5,
+                  left: 5,
+                  child: Text(widget.memberName,style: kLabelGroupStyle)),
+              Positioned(
+                  top: 5,
+                  left: 160,
+                  child: Text('${widget.price.toString()} \$',style: kLabelGroupStyle)),
+              Positioned(
+                  top: 5,
+                  left: 245,
+                  child: Text(widget.lastScore.toString(),style: kLabelGroupStyle)),
+              Positioned(
+                  top: 5,
+                  left: 315,
+                  child: Text(widget.overallScore.toString(),style: kLabelGroupStyle)),
+            ],
           ),
         ),
       ),
