@@ -34,7 +34,7 @@ class _SquadTabState extends State<SquadTab> {
                   _transfersMode = _transfersMode == Transfers.Off
                       ? Transfers.On
                       : Transfers.Off;
-                  print('Transfeeeeers${_transfersMode}');
+                  print('Transfeeeeers$_transfersMode');
                 });
               },
               child: Image.asset('assets/substitution.png')),

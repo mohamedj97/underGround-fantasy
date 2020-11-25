@@ -4,7 +4,7 @@ import 'package:fantasy/tabs/group/members_tab.dart';
 import 'package:fantasy/models/transfers.dart';
 
 
-AlertDialog Addplayer(){
+AlertDialog addPlayer(){
   return AlertDialog(
     title:Text("Transfer"),
     content: Text("Do you Want to add this Player to your Team ??"),
@@ -39,7 +39,7 @@ class PlayerInSquad extends StatelessWidget {
             child: Center(child: Text('$playerScore',style: kLabelPlayerPointsStyle,))),
         transfersMode==Transfers.On?GestureDetector(onTap: (){
           print('kokokkokookoko');
-          Navigator.push(context,  MaterialPageRoute(builder: (context)=>MembersTab(playerOutName: playerName,transfersMode: transfersMode,)));
+          Navigator.push(context,  MaterialPageRoute(builder: (context)=>MembersTab(playerOutName: playerName,transfersMode: Transfers.On,)));
         },
             child: Image(image: new AssetImage("assets/AddPlayer.png"),
               height: 30,

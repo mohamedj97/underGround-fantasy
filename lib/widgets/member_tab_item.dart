@@ -18,7 +18,7 @@ class MemberTabListItem extends StatefulWidget {
 }
 
 
-AlertDialog transfer_Player(String player1,String player2){
+AlertDialog transferPlayer(String player1,String player2){
   return AlertDialog(
     title:Text("Transfer"),
     content: Text("Do you Want to replace $player1 with $player2 ??"),
@@ -44,14 +44,16 @@ class _MemberTabListItemState extends State<MemberTabListItem> {
     return GestureDetector(
       onTap: (){
         setState(() {
-         /* if(_userType==UserType.Master)
+          if(widget.transfersMode==Transfers.Off&&_userType==UserType.Master)
           {
             showModalBottomSheet(context: context,
               builder:(BuildContext context)=> SetMemberPoints());
-          }*/
+          }
+          else if(widget.transfersMode==Transfers.On)
+            {
+              showDialog(context: context,builder: (_)=>transferPlayer(widget.playerOutName, widget.memberName));
+            }
 
-          //  print('Do you want to replace ${widget.playerOutName} with ${widget.memberName}');
-            showDialog(context: context,builder: (_)=>transfer_Player(widget.playerOutName, widget.memberName));
         });
       },
       child: Container(

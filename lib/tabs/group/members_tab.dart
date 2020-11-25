@@ -60,7 +60,7 @@ class _MembersTabState extends State<MembersTab> {
                     itemBuilder: (context,index){
                   return MemberTabListItem(memberName: _groupMembers[index]['name'],
                     lastScore: _groupMembers[index]['lastScore'],overallScore: _groupMembers[index]['overallScore']
-                    ,price: _groupMembers[index]['price'],playerOutName: widget.playerOutName,);
+                    ,price: _groupMembers[index]['price'],playerOutName: widget.playerOutName,transfersMode:widget.transfersMode,);
                 }),
               ),
             ],

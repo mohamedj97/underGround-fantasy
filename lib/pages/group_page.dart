@@ -21,7 +21,11 @@ class GroupPage extends StatefulWidget {
 class _GroupPageState extends State<GroupPage> {
   ContainerTransitionType _transitionType = ContainerTransitionType.fade;
   final Transfers transfersMode=Transfers.Off;
-
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
