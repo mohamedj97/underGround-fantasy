@@ -4,7 +4,6 @@ import 'package:fantasy/utilities/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../fragments/home_fragment.dart';
 import 'package:fantasy/fragments/rules_fragment.dart';
-import '../fragments/playerprofile.dart';
 import 'package:fantasy/fragments/groups_fragment.dart';
 import 'package:fantasy/fragments/profile.dart';
 
@@ -52,6 +51,22 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+//              Container(
+//                padding: EdgeInsets.all(1),
+//                decoration: new BoxDecoration(
+//                  color: Colors.red,
+//                  borderRadius: BorderRadius.circular(6),
+//                ),
+//                constraints: BoxConstraints(
+//                  minWidth: 12,
+//                  minHeight: 12,
+//                ),
+//                child: new Text(
+//                  '$_counter',
+//                  style: new TextStyle(color: Colors.white,fontSize: 20),
+//                  textAlign: TextAlign.center,
+//                ),
+//              ),
               Icon(Icons.home, size: 30,),
               Text('Home')
             ],

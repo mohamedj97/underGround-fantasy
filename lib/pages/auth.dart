@@ -9,6 +9,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 
 class AuthPage extends StatefulWidget {
   static const String id = 'AuthPage';
@@ -30,6 +31,7 @@ class _AuthPage extends State<AuthPage> {
   String _password;
   bool _isLoading=false;
   final TextEditingController emailController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
 
@@ -95,9 +97,6 @@ class _AuthPage extends State<AuthPage> {
                   return 'Please enter a valid email';
                 }
               },
-              onSaved: (String value) {
-                emailController.text = value;
-              },
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
                 color: Colors.white,
@@ -119,6 +118,41 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
+  Widget _buildNameTF() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: kBoxDecorationStyle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 10.0),
+          TextFormField(
+            controller: nameController,
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Name Nedded';
+              }
+            },
+            keyboardType: TextInputType.text,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              hintText: 'NAME',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildPasswordTF() {
     return Container(
       alignment: Alignment.centerLeft,
@@ -133,9 +167,6 @@ class _AuthPage extends State<AuthPage> {
               if (value.trim().isEmpty) {
                 return 'Password needed';
               }
-            },
-              onSaved:  (String value) {
-                passwordController.text = value;
             },
             obscureText: true,
             style: TextStyle(
@@ -209,11 +240,10 @@ class _AuthPage extends State<AuthPage> {
             _formKey.currentState.save;
             try {
               if (_authMode == AuthMode.SignUp) {
-                final newUser = await _auth.createUserWithEmailAndPassword(
-                    email: _email, password: _password);
-                if (newUser != null) {
-                  Navigator.pushReplacementNamed(context, HomePage.id);
-                }
+                setState(() {
+                  _isLoading = true;
+                });
+                await signUP(emailController.text,nameController.text,passwordController.text);
               } else if (_authMode == AuthMode.Login) {
                 setState(() {
                   _isLoading = true;
@@ -337,28 +367,68 @@ class _AuthPage extends State<AuthPage> {
 
   signIn(String email, pass) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map data = {
+    Map <String,String> authData = {
       'email': email,
       'password': pass
     };
-    var jsonResponse = null;
-    var response = await http.post("ameenfantasy.herokuapp.com/user/signin", body: data,headers:{'Content-Type': 'application/json'});
-    print(response);
-    if(response.statusCode == 200) {
-      jsonResponse = json.decode(response.body);
-      if(jsonResponse != null) {
+    final Map<String,String> headers ={
+      "Content-Type":'application/json',
+    };
+     Map<String, dynamic> responseData;
+
+      final http.Response response = await http.post(
+          '$BASE_URL''user/signin', body: jsonEncode(authData),
+          headers: headers);
+      responseData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        if (responseData != null) {
+          await sharedPreferences.setString("token", responseData['authToken']);
+          setState(() {
+            _isLoading = false;
+          });
+          print('${responseData['user']['email']}');
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+              builder: (BuildContext context) => HomePage()), (
+              Route<dynamic> route) => false);
+        }
+    }
+      else{
         setState(() {
           _isLoading = false;
         });
-      await sharedPreferences.setString("token", jsonResponse['authToken']);
-        //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => MainPage()), (Route<dynamic> route) => false);
+        print('${responseData['message']}');
+        Toast.show('${responseData['message']}', context,duration:Toast.LENGTH_LONG);
+      }
+  }
+
+  signUP(String email,name, pass)async
+  {
+    Map <String,String> authData = {
+      'email': email,
+      'name':name,
+      'password': pass
+    };
+    final Map<String,String> headers ={
+      "Content-Type":'application/json',
+    };
+    final http.Response response = await http.post('$BASE_URL''user', body: jsonEncode(authData),headers:headers);
+    final Map<String,dynamic> responseData=json.decode(response.body);
+    if(response.statusCode == 200) {
+      if(responseData != null) {
+        //await sharedPreferences.setString("token", responseData['authToken']);
+        setState(() {
+          _isLoading = false;
+        });
+        print('${responseData['message']}');
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage()), (Route<dynamic> route) => false);
       }
     }
-    else {
+    else{
       setState(() {
         _isLoading = false;
       });
-      print(response.body);
+      print('${responseData['message']}');
+      Toast.show('${responseData['message']}', context,duration:Toast.LENGTH_LONG);
     }
   }
 
@@ -367,7 +437,7 @@ class _AuthPage extends State<AuthPage> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
+        child: _isLoading?Center(child: CircularProgressIndicator()):GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Stack(
             children: <Widget>[
@@ -396,6 +466,8 @@ class _AuthPage extends State<AuthPage> {
                       SizedBox(
                         height: 20.0,
                       ),
+                      _authMode == AuthMode.SignUp?_buildNameTF():Container(),
+                      _authMode == AuthMode.SignUp?SizedBox(height: 20.0,):Container(),
                       _buildPasswordTF(),
                       SizedBox(
                         height: 20.0,

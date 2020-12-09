@@ -70,3 +70,5 @@ const kLargeButtonStyle=TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 25,
 );
+
+const String BASE_URL='https://ameenfantasy.herokuapp.com/';

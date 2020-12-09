@@ -35,12 +35,25 @@ class _HomeFragmentState extends State<HomeFragment> {
       print (e);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
           itemCount:versions.length,
           itemBuilder: (context,index){
+            return Dismissible(key: Key(null),
+                onDismissed: (DismissDirection direction){
+                  if (direction == DismissDirection.startToEnd) {
+                    print('deeeeeeeeeeeeeeeeeeee');
+                    setState(() {
+                      versions.removeAt(index);
+                      print('ssssssss${versions.length}');
+                    });
+                  }
+                },
+                background: Container(color: Colors.red),
+                child: NotificationLayout(versions[index]));
             return NotificationLayout(versions[index]);
           }),
     );
