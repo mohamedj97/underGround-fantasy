@@ -1,0 +1,4 @@
+enum PlayerMode{
+  Captain,
+  NotCaptain,
+}
