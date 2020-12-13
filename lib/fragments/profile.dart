@@ -46,7 +46,7 @@ class _ProfileState extends State<Profile> {
   void getCurrentUser() async
   {
     final user = await _auth.currentUser();
-    var ref = FirebaseStorage.instance.ref().child("/ProfileImages").child(
+    var ref = await FirebaseStorage.instance.ref().child("/ProfileImages").child(
         user.uid);
     _image = null;
     try {

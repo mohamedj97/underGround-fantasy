@@ -11,8 +11,7 @@ final kLabelStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
-
-final kBackGroundContainerDecoration=BoxDecoration(
+final kBackGroundContainerDecoration = BoxDecoration(
   gradient: LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -38,18 +37,18 @@ final kBoxDecorationStyle = BoxDecoration(
   ],
 );
 
-final kLabelGroupStyle=TextStyle(
-fontWeight: FontWeight.bold,
-    fontSize: 20,
-    color: Colors.black,
+final kLabelGroupStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+  color: Colors.black,
 );
-final kLabelPlayerNameStyle=TextStyle(
+final kLabelPlayerNameStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20,
   color: Colors.white,
 );
-final kPlayerNameBoxDecoration=BoxDecoration(
-  color: Color.fromRGBO(0,117,58,1),
+final kPlayerNameBoxDecoration = BoxDecoration(
+  color: Color.fromRGBO(0, 117, 58, 1),
   boxShadow: [
     BoxShadow(
       color: Colors.black12,
@@ -58,17 +57,20 @@ final kPlayerNameBoxDecoration=BoxDecoration(
     ),
   ],
 );
-final kLabelPlayerPointsStyle=TextStyle(
+final kLabelPlayerPointsStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 15,
   color: Colors.black,
 );
-final kPlayerSquadImage=Image.asset('assets/player.png',height: 80,);
-const Color kActiveCardColor=Color(0xFF1D1E33);
-const Color kInActiveCardColor= Color(0xFF111328);
-const kLargeButtonStyle=TextStyle(
+final kPlayerSquadImage = Image.asset(
+  'assets/player.png',
+  height: 80,
+);
+const Color kActiveCardColor = Color(0xFF1D1E33);
+const Color kInActiveCardColor = Color(0xFF111328);
+const kLargeButtonStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 25,
 );
 
-const String BASE_URL='https://ameenfantasy.herokuapp.com/';
+const String BASE_URL = 'https://ameenfantasy.herokuapp.com/';
