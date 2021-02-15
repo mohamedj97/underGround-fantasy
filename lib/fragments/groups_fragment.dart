@@ -25,6 +25,7 @@ class _GroupsFragmentState extends State<GroupsFragment> {
   List<GroupModel> groupsList = [];
 
   Future<List<GroupModel>> getGroups() async {
+    groupsList.clear();
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     token = sharedPreferences.getString("token");
     final Map<String, String> headers = {

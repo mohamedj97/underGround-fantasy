@@ -60,7 +60,6 @@ class _CreatingOrAddingGroupState extends State<CreatingOrAddingGroup> {
     token=sharedPreferences.getString("token");
     Map <String,dynamic> authData = {
       'name': groupName,
-      'members':[]
     };
     final Map<String,String> headers ={
       "Content-Type":'application/json',
@@ -74,10 +73,11 @@ class _CreatingOrAddingGroupState extends State<CreatingOrAddingGroup> {
     if (response.statusCode == 200) {
       if (responseData != null) {
         Toast.show('successfully Created', context,duration:Toast.LENGTH_LONG);
-        print('${responseData}');
+        print('$responseData');
 //        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
 ////            builder: (BuildContext context) => Gr()), (
 ////            Route<dynamic> route) => false);
+      ////////// b7bk ya sabry
       }
     }
     else{

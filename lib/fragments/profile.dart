@@ -156,10 +156,6 @@ class _ProfileState extends State<Profile> {
               textFieldContainer(
                   _teamNameController, "team-Name", "example@abc.com",
                   Icon(Icons.edit)),
-
-              textFieldContainer(
-                  _passwordController, "Password", "**********",
-                  Icon(Icons.lock)),
               SizedBox(
                 height: 10.0,
               ),

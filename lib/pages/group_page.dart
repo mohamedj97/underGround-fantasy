@@ -90,7 +90,7 @@ class _GroupPageState extends State<GroupPage> {
                       child: GestureDetector(
                         child: Icon(Icons.share),
                         onTap: () {
-                          Share.share("Use this code to join The Group : $groupCode");
+                          Share.share("Use this code to join $groupName ' Group' : $groupCode");
                         },
                       ))
                 ],
